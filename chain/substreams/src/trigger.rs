@@ -132,7 +132,7 @@ where
         logger: &Logger,
         _hosts: &[Arc<T::Host>],
         block: &Arc<Block>,
-        _trigger: &TriggerData,
+        _trigger: &Vec<TriggerData>,
         mut state: BlockState<Chain>,
         proof_of_indexing: &SharedProofOfIndexing,
         causality_region: &str,

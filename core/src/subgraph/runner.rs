@@ -249,35 +249,65 @@ where
 
             // Process the triggers in each host in the same order the
             // corresponding data sources have been created.
-            for trigger in triggers {
-                block_state = self
-                    .ctx
-                    .instance
-                    .trigger_processor
-                    .process_trigger(
-                        &logger,
-                        &runtime_hosts,
-                        &block,
-                        &trigger,
-                        block_state,
-                        &proof_of_indexing,
-                        &causality_region,
-                        &self.inputs.debug_fork,
-                        &self.metrics.subgraph,
-                    )
-                    .await
-                    .map_err(|e| {
-                        // This treats a `PossibleReorg` as an ordinary error which will fail the subgraph.
-                        // This can cause an unnecessary subgraph failure, to fix it we need to figure out a
-                        // way to revert the effect of `create_dynamic_data_sources` so we may return a
-                        // clean context as in b21fa73b-6453-4340-99fb-1a78ec62efb1.
-                        match e {
-                            MappingError::PossibleReorg(e) | MappingError::Unknown(e) => {
-                                BlockProcessingError::Unknown(e)
-                            }
+            // for trigger in triggers {
+            //     block_state = self
+            //         .ctx
+            //         .instance
+            //         .trigger_processor
+            //         .process_trigger(
+            //             &logger,
+            //             &runtime_hosts,
+            //             &block,
+            //             &trigger,
+            //             block_state,
+            //             &proof_of_indexing,
+            //             &causality_region,
+            //             &self.inputs.debug_fork,
+            //             &self.metrics.subgraph,
+            //         )
+            //         .await
+            //         .map_err(|e| {
+            //             // This treats a `PossibleReorg` as an ordinary error which will fail the subgraph.
+            //             // This can cause an unnecessary subgraph failure, to fix it we need to figure out a
+            //             // way to revert the effect of `create_dynamic_data_sources` so we may return a
+            //             // clean context as in b21fa73b-6453-4340-99fb-1a78ec62efb1.
+            //             match e {
+            //                 MappingError::PossibleReorg(e) | MappingError::Unknown(e) => {
+            //                     BlockProcessingError::Unknown(e)
+            //                 }
+            //             }
+            //         })?;
+            // }
+
+
+            block_state = self
+                .ctx
+                .instance
+                .trigger_processor
+                .process_trigger(
+                    &logger,
+                    &runtime_hosts,
+                    &block,
+                    &triggers,
+                    block_state,
+                    &proof_of_indexing,
+                    &causality_region,
+                    &self.inputs.debug_fork,
+                    &self.metrics.subgraph,
+                )
+                .await
+                .map_err(|e| {
+                    // This treats a `PossibleReorg` as an ordinary error which will fail the subgraph.
+                    // This can cause an unnecessary subgraph failure, to fix it we need to figure out a
+                    // way to revert the effect of `create_dynamic_data_sources` so we may return a
+                    // clean context as in b21fa73b-6453-4340-99fb-1a78ec62efb1.
+                    match e {
+                        MappingError::PossibleReorg(e) | MappingError::Unknown(e) => {
+                            BlockProcessingError::Unknown(e)
                         }
-                    })?;
-            }
+                    }
+                })?;
+
         }
 
         let has_errors = block_state.has_errors();
@@ -293,16 +323,16 @@ where
             return Err(BlockProcessingError::Canceled);
         }
 
-        if let Some(proof_of_indexing) = proof_of_indexing {
-            let proof_of_indexing = Arc::try_unwrap(proof_of_indexing).unwrap().into_inner();
-            update_proof_of_indexing(
-                proof_of_indexing,
-                &self.metrics.host.stopwatch,
-                &self.inputs.deployment.hash,
-                &mut block_state.entity_cache,
-            )
-            .await?;
-        }
+        // if let Some(proof_of_indexing) = proof_of_indexing {
+        //     let proof_of_indexing = Arc::try_unwrap(proof_of_indexing).unwrap().into_inner();
+        //     update_proof_of_indexing(
+        //         proof_of_indexing,
+        //         &self.metrics.host.stopwatch,
+        //         &self.inputs.deployment.hash,
+        //         &mut block_state.entity_cache,
+        //     )
+        //     .await?;
+        // }
 
         let section = self
             .metrics
@@ -427,29 +457,52 @@ where
         // println!("triggers num: {}",triggers.len());
         let start = Instant::now();
 
-        for trigger in triggers {
-            block_state = self
-                .ctx
-                .instance
-                .process_trigger(
-                    &self.logger,
-                    block,
-                    &trigger,
-                    block_state,
-                    proof_of_indexing,
-                    causality_region,
-                    &self.inputs.debug_fork,
-                    &self.metrics.subgraph,
-                )
-                .await
-                .map_err(move |mut e| {
-                    let error_context = trigger.error_context();
-                    if !error_context.is_empty() {
-                        e = e.context(error_context);
-                    }
-                    e.context("failed to process trigger".to_string())
-                })?;
-        }
+        // for trigger in triggers {
+        //     block_state = self
+        //         .ctx
+        //         .instance
+        //         .process_trigger(
+        //             &self.logger,
+        //             block,
+        //             &trigger,
+        //             block_state,
+        //             proof_of_indexing,
+        //             causality_region,
+        //             &self.inputs.debug_fork,
+        //             &self.metrics.subgraph,
+        //         )
+        //         .await
+        //         .map_err(move |mut e| {
+        //             let error_context = trigger.error_context();
+        //             if !error_context.is_empty() {
+        //                 e = e.context(error_context);
+        //             }
+        //             e.context("failed to process trigger".to_string())
+        //         })?;
+        // }
+        block_state = self
+                    .ctx
+                    .instance
+                    .process_trigger(
+                        &self.logger,
+                        block,
+                        &triggers,
+                        block_state,
+                        proof_of_indexing,
+                        causality_region,
+                        &self.inputs.debug_fork,
+                        &self.metrics.subgraph,
+                    )
+                    .await
+                    .map_err(move |mut e| {
+                        let error_context = triggers[0].error_context();
+                        if !error_context.is_empty() {
+                            e = e.context(error_context);
+                        }
+                        e.context("failed to process trigger".to_string())
+                    })?;
+
+
 
         let elapsed = start.elapsed().as_secs_f64();
 //=========================================================================================================

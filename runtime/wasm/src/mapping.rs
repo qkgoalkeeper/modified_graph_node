@@ -10,7 +10,13 @@ use graph::runtime::gas::Gas;
 use std::collections::BTreeMap;
 use std::sync::Arc;
 use std::thread;
-use std::time::Instant;
+use std::time::{Instant, SystemTime};
+
+
+// use rayon::prelude::*;
+use safina_threadpool::ThreadPool;
+use chrono::prelude::*;
+
 
 /// Spawn a wasm module in its own thread.
 pub fn spawn_module<C: Blockchain>(
@@ -35,88 +41,225 @@ pub fn spawn_module<C: Blockchain>(
     // subgraph to fail the next time it tries to handle an event.
     let conf =
         thread::Builder::new().name(format!("mapping-{}-{}", &subgraph_id, uuid::Uuid::new_v4()));
+    // conf.spawn(move || {
+    //     let _runtime_guard = runtime.enter();
+
+    //     // Pass incoming triggers to the WASM module and return entity changes;
+    //     // Stop when canceled because all RuntimeHosts and their senders were dropped.
+    //     match mapping_request_receiver
+    //         .map_err(|()| unreachable!())
+    //         .for_each(move |request| {
+    //             let MappingRequest {
+    //                 ctx,
+    //                 trigger,
+    //                 result_sender,
+    //             } = request;
+    //             let start_time = Instant::now();
+    //             let result = instantiate_module_and_handle_trigger(
+    //                 valid_module.cheap_clone(),
+    //                 ctx,
+    //                 trigger,
+    //                 host_metrics.cheap_clone(),
+    //                 timeout,
+    //                 experimental_features,
+    //             );
+
+    //             println!(
+    //                 "thread {:?}  used time: {} ms",
+    //                 1,
+    //                 start_time.elapsed().as_secs_f64()
+    //             );
+
+    //             result_sender
+    //                 .send(result)
+    //                 .map_err(|_| anyhow::anyhow!("WASM module result receiver dropped."))
+
+    //         })
+    //         .wait()
+    //     {
+    //         Ok(()) => debug!(logger, "Subgraph stopped, WASM runtime thread terminated"),
+    //         Err(e) => debug!(logger, "WASM runtime thread terminated abnormally";
+    //                                 "error" => e.to_string()),
+    //     }
+
+
+
+    // })
+    // .map(|_| ())
+    // .context("Spawning WASM runtime thread failed")?;
+
+
     conf.spawn(move || {
         let _runtime_guard = runtime.enter();
 
         // Pass incoming triggers to the WASM module and return entity changes;
         // Stop when canceled because all RuntimeHosts and their senders were dropped.
-        match mapping_request_receiver
+        mapping_request_receiver
             .map_err(|()| unreachable!())
             .for_each(move |request| {
                 let MappingRequest {
                     ctx,
-                    trigger,
+                    triggers,
                     result_sender,
                 } = request;
-                let start_time = Instant::now();
-                let result = instantiate_module_and_handle_trigger(
-                    valid_module.cheap_clone(),
-                    ctx,
-                    trigger,
-                    host_metrics.cheap_clone(),
-                    timeout,
-                    experimental_features,
-                );
 
+                // 1000 events
+                // 4 1.3
+                // 2 2.5
+                // 1 5
+                let init_time = Instant::now();
+                let n_workers = 4;
+                let n_iter_group = triggers.len() / n_workers;
+                let pool = ThreadPool::new("mapping_worker", n_workers).unwrap();
+
+                let (sender, receiver) = std::sync::mpsc::channel();
+
+                let mut trigger_groups = Vec::new();
+                let mut trigger_group = Vec::new();
+                let mut i = 0;
                 println!(
-                    "thread {:?}  used time: {} ms",
-                    1,
-                    start_time.elapsed().as_secs_f64()
+                    "triggers len: {} n_workers: {} n_iter_group: {} ",
+                    triggers.len(),
+                    n_workers,
+                    n_iter_group
                 );
+                for trigger in triggers {
+                    trigger_group.push(trigger);
+                    if trigger_group.len() == n_iter_group {
+                        trigger_groups.push(trigger_group);
+                        trigger_group = Vec::new();
+                    }
+                }
+                println!("trigger_groups len: {}", trigger_groups.len());
+                println!("init time: {} ms", init_time.elapsed().as_millis());
 
-                result_sender
-                    .send(result)
-                    .map_err(|_| anyhow::anyhow!("WASM module result receiver dropped."))
-
+                for trigger_group in trigger_groups {
+                    let t2 = host_metrics.cheap_clone();
+                    let t1 = valid_module.cheap_clone();
+                    let t3 = timeout.clone();
+                    let t4 = experimental_features.clone();
+                    let ctx_arc = ctx.derive_with_empty_block_state();
+                    let s = sender.clone();
+                    pool.schedule(move || {
+                        let id = thread::current().id();
+                        let start_dt = Local::now();
+                        let start_time = Instant::now();
+                        println!(
+                            "thread {:?}  start  time: {} ",
+                            id,
+                            start_dt.format("%Y-%m-%d %H:%M:%S:%.3f").to_string()
+                        );
+                        let result = instantiate_module_and_handle_trigger_group(
+                            t1,
+                            ctx_arc,
+                            trigger_group,
+                            t2,
+                            t3,
+                            t4,
+                        );
+                        s.send(result).unwrap();
+                        // thread::sleep(Duration::from_millis(100));
+                        println!(
+                            "thread {:?}  used time: {} ms",
+                            id,
+                            start_time.elapsed().as_millis()
+                        );
+                    });
+                }
+                pool.join();
+                let res_groups: Vec<_> = receiver.try_iter().collect();
+                let mut res = Vec::new();
+                for res_group in res_groups {
+                    for res_temp in res_group {
+                        res.push(res_temp);
+                    }
+                }
+                result_sender.send(res).unwrap();
+                Ok(())
             })
             .wait()
-        {
-            Ok(()) => debug!(logger, "Subgraph stopped, WASM runtime thread terminated"),
-            Err(e) => debug!(logger, "WASM runtime thread terminated abnormally";
-                                    "error" => e.to_string()),
-        }
-
-
-
+            .unwrap();
+        // .wait()
     })
     .map(|_| ())
     .context("Spawning WASM runtime thread failed")?;
 
+
     Ok(mapping_request_sender)
 }
 
-fn instantiate_module_and_handle_trigger<C: Blockchain>(
+// fn instantiate_module_and_handle_trigger<C: Blockchain>(
+//     valid_module: Arc<ValidModule>,
+//     ctx: MappingContext<C>,
+//     trigger: TriggerWithHandler<C>,
+//     host_metrics: Arc<HostMetrics>,
+//     timeout: Option<Duration>,
+//     experimental_features: ExperimentalFeatures,
+// ) -> Result<(BlockState<C>, Gas), MappingError> {
+//     let logger = ctx.logger.cheap_clone();
+
+//     // Start the WASM module runtime.
+//     let section = host_metrics.stopwatch.start_section("module_init");
+//     let module = WasmInstance::from_valid_module_with_ctx(
+//         valid_module,
+//         ctx,
+//         host_metrics.cheap_clone(),
+//         timeout,
+//         experimental_features,
+//     )?;
+//     section.end();
+
+//     let _section = host_metrics.stopwatch.start_section("run_handler");
+//     if ENV_VARS.log_trigger_data {
+//         debug!(logger, "trigger data: {:?}", trigger);
+//     }
+//     module.handle_trigger(trigger)
+// }
+
+fn instantiate_module_and_handle_trigger_group<C:Blockchain>(
     valid_module: Arc<ValidModule>,
     ctx: MappingContext<C>,
-    trigger: TriggerWithHandler<C>,
+    trigger_group: Vec<TriggerWithHandler<C>>,
     host_metrics: Arc<HostMetrics>,
     timeout: Option<Duration>,
     experimental_features: ExperimentalFeatures,
-) -> Result<(BlockState<C>, Gas), MappingError> {
-    let logger = ctx.logger.cheap_clone();
+) -> Vec<Result<(BlockState<C>, Gas), MappingError>> {
+    let mut res: Vec<Result<(BlockState<C>, Gas), MappingError>> = Vec::new();
 
-    // Start the WASM module runtime.
-    let section = host_metrics.stopwatch.start_section("module_init");
-    let module = WasmInstance::from_valid_module_with_ctx(
-        valid_module,
-        ctx,
-        host_metrics.cheap_clone(),
-        timeout,
-        experimental_features,
-    )?;
-    section.end();
+    for trigger in trigger_group {
+        let c_valid_module = valid_module.clone();
+        let c_ctx = ctx.derive_with_empty_block_state();
+        let c_host_metrics = host_metrics.clone();
+        let c_timeout = timeout.clone();
+        let c_experimental_features = experimental_features.clone();
+        let logger = c_ctx.logger.cheap_clone();
+        // Start the WASM module runtime.
 
-    let _section = host_metrics.stopwatch.start_section("run_handler");
-    if ENV_VARS.log_trigger_data {
-        debug!(logger, "trigger data: {:?}", trigger);
+        // let section = host_metrics.stopwatch.start_section("module_init");
+        let module = WasmInstance::from_valid_module_with_ctx(
+            c_valid_module,
+            c_ctx,
+            c_host_metrics,
+            c_timeout,
+            c_experimental_features,
+        );
+        // section.end();
+
+        // let _section = host_metrics.stopwatch.start_section("run_handler");
+        if ENV_VARS.log_trigger_data {
+            debug!(logger, "trigger data: {:?}", trigger);
+        }
+        let result = module.expect("REASON").handle_trigger(trigger);
+        res.push(result);
     }
-    module.handle_trigger(trigger)
+    res
 }
 
 pub struct MappingRequest<C: Blockchain> {
     pub(crate) ctx: MappingContext<C>,
-    pub(crate) trigger: TriggerWithHandler<C>,
-    pub(crate) result_sender: Sender<Result<(BlockState<C>, Gas), MappingError>>,
+    pub(crate) triggers: Vec<TriggerWithHandler<C>>,
+    // pub(crate) result_sender: Sender<Result<(BlockState<C>, Gas), MappingError>>,
+    pub(crate) result_sender: Sender<Vec<Result<(BlockState<C>, Gas), MappingError>>>,
 }
 
 pub struct MappingContext<C: Blockchain> {

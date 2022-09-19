@@ -55,7 +55,7 @@ pub trait RuntimeHost<C: Blockchain>: Send + Sync + 'static {
         &self,
         logger: &Logger,
         block_ptr: BlockPtr,
-        trigger: TriggerWithHandler<C>,
+        trigger: Vec<TriggerWithHandler<C>>,
         state: BlockState<C>,
         proof_of_indexing: SharedProofOfIndexing,
         debug_fork: &Option<Arc<dyn SubgraphFork>>,

@@ -1,4 +1,5 @@
 use anyhow::anyhow;
+use serde_plain::derive_deserialize_from_fromstr;
 use std::collections::{BTreeMap, HashMap};
 use std::fmt::{self, Debug};
 use std::sync::Arc;
@@ -18,6 +19,8 @@ use crate::util::lfu_cache::LfuCache;
 ///   (1) no entity appears in more than one operation
 ///   (2) only entities that will actually be changed from what they
 ///       are in the store are changed
+
+#[derive(Clone)]
 pub struct EntityCache {
     /// The state of entities in the store. An entry of `None`
     /// means that the entity is not present in the store

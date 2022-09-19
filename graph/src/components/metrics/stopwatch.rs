@@ -148,16 +148,16 @@ impl StopwatchInner {
 
     fn end_section(&mut self, id: String) {
         // Validate that the expected section is running.
-        match self.section_stack.last() {
-            Some(current_section) if current_section == &id => {
-                self.record_and_reset();
-                self.section_stack.pop();
-            }
-            Some(current_section) => error!(self.logger, "`end_section` with mismatched section";
-                                                        "current" => current_section,
-                                                        "received" => id),
-            None => error!(self.logger, "`end_section` with no current section";
-                                        "received" => id),
-        }
+        // match self.section_stack.last() {
+        //     Some(current_section) if current_section == &id => {
+        //         self.record_and_reset();
+        //         self.section_stack.pop();
+        //     }
+        //     Some(current_section) => error!(self.logger, "`end_section` with mismatched section";
+        //                                                 "current" => current_section,
+        //                                                 "received" => id),
+        //     None => error!(self.logger, "`end_section` with no current section";
+        //                                 "received" => id),
+        // }
     }
 }

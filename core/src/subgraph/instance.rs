@@ -126,7 +126,7 @@ where
         &self,
         logger: &Logger,
         block: &Arc<C::Block>,
-        trigger: &C::TriggerData,
+        trigger: &Vec<C::TriggerData>,
         state: BlockState<C>,
         proof_of_indexing: &SharedProofOfIndexing,
         causality_region: &str,

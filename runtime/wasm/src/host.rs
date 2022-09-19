@@ -146,14 +146,14 @@ where
         &self,
         logger: &Logger,
         state: BlockState<C>,
-        trigger: TriggerWithHandler<C>,
+        triggers: Vec<TriggerWithHandler<C>>,
         block_ptr: BlockPtr,
         proof_of_indexing: SharedProofOfIndexing,
         debug_fork: &Option<Arc<dyn SubgraphFork>>,
     ) -> Result<BlockState<C>, MappingError> {
-        let handler = trigger.handler_name().to_string();
+        let handler = triggers[0].handler_name().to_string();
 
-        let extras = trigger.logging_extras();
+        let extras = triggers[0].logging_extras();
         trace!(
             logger, "Start processing trigger";
             &extras,
@@ -178,16 +178,19 @@ where
                     host_fns: self.host_fns.cheap_clone(),
                     debug_fork: debug_fork.cheap_clone(),
                 },
-                trigger,
+                triggers,
                 result_sender,
             })
             .compat()
             .await
             .context("Mapping terminated before passing in trigger")?;
 
-        let result = result_receiver
+        let mut result = result_receiver
             .await
             .context("Mapping terminated before handling trigger")?;
+
+
+        let block_state_res = result.pop().unwrap();
 
 
         let elapsed = start_time.elapsed();
@@ -207,7 +210,7 @@ where
         metrics.observe_handler_execution_time(elapsed.as_secs_f64(), &handler);
 
         // If there is an error, "gas_used" is incorrectly reported as 0.
-        let gas_used = result.as_ref().map(|(_, gas)| gas).unwrap_or(&Gas::ZERO);
+        let gas_used = block_state_res.as_ref().map(|(_, gas)| gas).unwrap_or(&Gas::ZERO);
         info!(
             logger, "Done processing trigger";
             &extras,
@@ -218,7 +221,7 @@ where
         );
 
         // Discard the gas value
-        result.map(|(block_state, _)| block_state)
+        block_state_res.map(|(block_state, _)| block_state)
     }
 }
 
@@ -237,7 +240,7 @@ impl<C: Blockchain> RuntimeHostTrait<C> for RuntimeHost<C> {
         &self,
         logger: &Logger,
         block_ptr: BlockPtr,
-        trigger: TriggerWithHandler<C>,
+        trigger: Vec<TriggerWithHandler<C>>,
         state: BlockState<C>,
         proof_of_indexing: SharedProofOfIndexing,
         debug_fork: &Option<Arc<dyn SubgraphFork>>,

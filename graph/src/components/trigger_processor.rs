@@ -21,7 +21,7 @@ where
         logger: &Logger,
         hosts: &[Arc<T::Host>],
         block: &Arc<C::Block>,
-        trigger: &C::TriggerData,
+        trigger: &Vec<C::TriggerData>,
         mut state: BlockState<C>,
         proof_of_indexing: &SharedProofOfIndexing,
         causality_region: &str,

@@ -11,7 +11,7 @@ pub struct DataSourceTemplateInfo<C: Blockchain> {
     pub creation_block: BlockNumber,
 }
 
-#[derive(Debug)]
+#[derive(Debug,Clone)]
 pub struct BlockState<C: Blockchain> {
     pub entity_cache: EntityCache,
     pub deterministic_errors: Vec<SubgraphError>,

@@ -137,7 +137,7 @@ impl<C: Blockchain> HostExports<C> {
         stopwatch: &StopwatchMetrics,
         gas: &GasCounter,
     ) -> Result<(), anyhow::Error> {
-        let poi_section = stopwatch.start_section("host_export_store_set__proof_of_indexing");
+        // let poi_section = stopwatch.start_section("host_export_store_set__proof_of_indexing");
         // write_poi_event(
         //     proof_of_indexing,
         //     &ProofOfIndexingEvent::SetEntity {
@@ -148,7 +148,7 @@ impl<C: Blockchain> HostExports<C> {
         //     &self.causality_region,
         //     logger,
         // );
-        poi_section.end();
+        // poi_section.end();
 
         let key = EntityKey {
             subgraph_id: self.subgraph_id.clone(),

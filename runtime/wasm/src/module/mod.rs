@@ -865,7 +865,7 @@ impl<C: Blockchain> WasmInstanceContext<C> {
         data_ptr: AscPtr<AscEntity>,
     ) -> Result<(), HostExportError> {
         let stopwatch = &self.host_metrics.stopwatch;
-        stopwatch.start_section("host_export_store_set__wasm_instance_context_store_set");
+        // stopwatch.start_section("host_export_store_set__wasm_instance_context_store_set");
 
         let entity = asc_get(self, entity_ptr, gas)?;
         let id = asc_get(self, id_ptr, gas)?;

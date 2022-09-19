@@ -24,7 +24,7 @@ where
         logger: &Logger,
         hosts: &[Arc<T::Host>],
         block: &Arc<C::Block>,
-        trigger: &C::TriggerData,
+        triggers: &Vec<C::TriggerData>,
         mut state: BlockState<C>,
         proof_of_indexing: &SharedProofOfIndexing,
         causality_region: &str,
@@ -40,20 +40,28 @@ where
         }
 
         for host in hosts {
-            let mapping_trigger = match host.match_and_decode(trigger, block, logger)? {
-                // Trigger matches and was decoded as a mapping trigger.
-                Some(mapping_trigger) => mapping_trigger,
+            let mut mapping_triggers = Vec::new();
+            for trigger in triggers{
+                match host.match_and_decode(trigger, block, logger)? {
+                    // Trigger matches and was decoded as a mapping trigger.
+                    Some(mapping_trigger) => mapping_triggers.push(mapping_trigger),
+    
+                    // Trigger does not match, do not process it.
+                    None => continue,
+                };
+            }
 
-                // Trigger does not match, do not process it.
-                None => continue,
-            };
+            if mapping_triggers.len()==0{
+                continue;
+            }
+
 
             let start = Instant::now();
             state = host
                 .process_mapping_trigger(
                     logger,
                     block.ptr(),
-                    mapping_trigger,
+                    mapping_triggers,
                     state,
                     proof_of_indexing.cheap_clone(),
                     debug_fork,
