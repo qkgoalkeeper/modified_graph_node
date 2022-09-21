@@ -963,6 +963,30 @@ impl EntityOp {
             Update(current) | Overwrite(current) => current.merge(update),
         }
     }
+
+    fn combine(&mut self, next: EntityOp) {
+        use EntityOp::*;
+        let update = match next {
+            // Remove and Overwrite ignore the current value.
+            Remove | Overwrite(_) => {
+                *self = next;
+                return;
+            }
+            Update(update) => update,
+        };
+
+        // We have an update, apply it.
+        match self {
+            // This is how `Overwrite` is constructed, by accumulating `Update` onto `Remove`.
+            Remove => *self = Overwrite(update),
+            Update(current) | Overwrite(current) => current.combine(update),
+        }
+    }
+
+
+
+
+
 }
 
 /// Determines which columns should be selected in a table.

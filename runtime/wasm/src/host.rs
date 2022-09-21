@@ -189,28 +189,29 @@ where
             .await
             .context("Mapping terminated before handling trigger")?;
 
-
-        let block_state_res = result.pop().unwrap();
-
+        
 
         let elapsed = start_time.elapsed();
-        //println!("result_receiver used time: {}",elapsed.as_secs_f64());
-        // let resut_copy=result.as_ref().unwrap().clone();
-        // println!("--host.rs: {:?}",resut_copy.0.entity_cache);
-        // let temp_cache = resut_copy.0.entity_cache.as_modifications().as_mut().unwrap();
-        // println!("{:?}",temp_cache.modifications);
-        // let result_copy = result.as_ref().unwrap().clone();
-        // println!("{:?}",result_copy.0.entity_cache);
-        // println!("------------START block_state results-------------------");
-        // println!("{}",1);
-        // let resut_copy=result.as_ref().unwrap().clone();
-        // println!("{:?}",resut_copy.0.entity_cache);
-        // println!("------------END block_state results-------------------");
 
         metrics.observe_handler_execution_time(elapsed.as_secs_f64(), &handler);
 
-        // If there is an error, "gas_used" is incorrectly reported as 0.
-        let gas_used = block_state_res.as_ref().map(|(_, gas)| gas).unwrap_or(&Gas::ZERO);
+
+        let mut final_state_res = result.pop().unwrap();
+
+
+        while !result.is_empty(){
+            let block_state_res = result.pop().unwrap();
+            let final_state = final_state_res.as_mut().unwrap();
+            let next_state = block_state_res.unwrap();
+            final_state.0.combine(next_state.0);
+            final_state.1+=next_state.1;
+        }
+
+
+
+
+
+        let gas_used =  final_state_res.as_ref().map(|(_, gas)| gas).unwrap_or(&Gas::ZERO);
         info!(
             logger, "Done processing trigger";
             &extras,
@@ -220,8 +221,41 @@ where
             "gas_used" => gas_used.to_string(),
         );
 
+        // let block_state_res = result.pop().unwrap();
+
+
+        // let elapsed = start_time.elapsed();
+        // //println!("result_receiver used time: {}",elapsed.as_secs_f64());
+        // // let resut_copy=result.as_ref().unwrap().clone();
+        // // println!("--host.rs: {:?}",resut_copy.0.entity_cache);
+        // // let temp_cache = resut_copy.0.entity_cache.as_modifications().as_mut().unwrap();
+        // // println!("{:?}",temp_cache.modifications);
+        // // let result_copy = result.as_ref().unwrap().clone();
+        // // println!("{:?}",result_copy.0.entity_cache);
+        // // println!("------------START block_state results-------------------");
+        // // println!("{}",1);
+        // // let resut_copy=result.as_ref().unwrap().clone();
+        // // println!("{:?}",resut_copy.0.entity_cache);
+        // // println!("------------END block_state results-------------------");
+
+        // metrics.observe_handler_execution_time(elapsed.as_secs_f64(), &handler);
+
+        // // If there is an error, "gas_used" is incorrectly reported as 0.
+        // let gas_used = block_state_res.as_ref().map(|(_, gas)| gas).unwrap_or(&Gas::ZERO);
+        // info!(
+        //     logger, "Done processing trigger";
+        //     &extras,
+        //     "total_ms" => elapsed.as_millis(),
+        //     "handler" => handler,
+        //     "data_source" => &self.data_source.name(),
+        //     "gas_used" => gas_used.to_string(),
+        // );
+
         // Discard the gas value
-        block_state_res.map(|(block_state, _)| block_state)
+        // block_state_res.map(|(block_state, _)| block_state)
+        // block_state_res.map(|(block_state, _)| block_state)
+
+        final_state_res.map(|(block_state, _)| block_state)
     }
 }
 

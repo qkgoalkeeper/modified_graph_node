@@ -683,6 +683,43 @@ impl Entity {
         }
     }
 
+    pub fn combine(&mut self, update: Entity) {
+
+            let a = self.get("delta").clone();
+            let oa = self.get("operation").clone();
+            let b = update.get("delta").clone();
+            let ob=update.get("operation").clone();
+
+            match (oa,a,ob,b){
+                (Some(Value::Int(v1)),Some(Value::BigInt(v2)),Some(Value::Int(v3)),Some(Value::BigInt(v4)))=>{
+                    let x = v2.clone();
+                    let y = v4.clone();
+                    let (d,c) =
+                    if *v1==1&&*v3==1{
+                        (1,x+y)
+                    }else if *v1==1&&*v3==-1{
+                        if *v2>=*v4{
+                            (1,x-y)
+                        }else{
+                            (-1,y-x)
+                        }
+                    }else if *v1==-1&&*v3==1{
+                        if *v2>=*v4{
+                            (-1,x-y)
+                        }else{
+                            (1,y-x)
+                        }
+                    }else{
+                        (-1,x+y)
+                    };
+                    self.set("operation", d);
+                    self.set("delta", c);
+                },
+                _=>{self.merge(update)}
+            };
+        
+    }
+
     /// Merges an entity update `update` into this entity, removing `Value::Null` values.
     ///
     /// If a key exists in both entities, the value from `update` is chosen.

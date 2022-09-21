@@ -57,6 +57,29 @@ impl<C: Blockchain> BlockState<C> {
         entity_cache.extend(other.entity_cache);
     }
 
+    pub fn combine(&mut self, other: BlockState<C>) {
+        assert!(!other.in_handler);
+
+        let BlockState {
+            entity_cache,
+            deterministic_errors,
+            created_data_sources,
+            handler_created_data_sources,
+            in_handler,
+        } = self;
+
+        match in_handler {
+            true => handler_created_data_sources.extend(other.created_data_sources),
+            false => created_data_sources.extend(other.created_data_sources),
+        }
+        deterministic_errors.extend(other.deterministic_errors);
+        entity_cache.combine(other.entity_cache);
+    }
+
+
+
+
+
     pub fn has_errors(&self) -> bool {
         !self.deterministic_errors.is_empty()
     }

@@ -212,6 +212,23 @@ impl EntityCache {
         }
     }
 
+    fn entity_cop(&mut self, key: EntityKey, op: EntityOp) {
+        use std::collections::hash_map::Entry;
+        let updates = match self.in_handler {
+            true => &mut self.handler_updates,
+            false => &mut self.updates,
+        };
+
+        match updates.entry(key) {
+            Entry::Vacant(entry) => {
+                entry.insert(op);
+            }
+            Entry::Occupied(mut entry) => {
+                entry.get_mut().combine(op)
+            },
+        }
+    }
+
     pub(crate) fn extend(&mut self, other: EntityCache) {
         assert!(!other.in_handler);
 
@@ -221,6 +238,15 @@ impl EntityCache {
         }
     }
 
+
+    pub(crate) fn combine(&mut self, other: EntityCache) {
+        assert!(!other.in_handler);
+
+        self.current.extend(other.current);
+        for (key, op) in other.updates {
+            self.entity_cop(key, op);
+        }
+    }
     /// Return the changes that have been made via `set` and `remove` as
     /// `EntityModification`, making sure to only produce one when a change
     /// to the current state is actually needed.
