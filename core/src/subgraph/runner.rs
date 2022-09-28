@@ -4,6 +4,7 @@ use crate::subgraph::inputs::IndexingInputs;
 use crate::subgraph::state::IndexingState;
 use crate::subgraph::stream::new_block_stream;
 use atomic_refcell::AtomicRefCell;
+use futures01::sync::mpsc::Receiver;
 use graph::blockchain::block_stream::{BlockStreamEvent, BlockWithTriggers, FirehoseCursor};
 use graph::blockchain::{Block, Blockchain, DataSource, TriggerFilter as _};
 use graph::components::{
@@ -18,12 +19,18 @@ use graph::data::subgraph::{
 use graph::prelude::*;
 use graph::util::{backoff::ExponentialBackoff, lfu_cache::LfuCache};
 use std::convert::TryFrom;
-use std::sync::Arc;
+
+use std::sync::{Arc};
+use tokio::sync::Mutex;
+use std::thread;
 use std::time::{Duration, Instant};
+
+use futures03::channel::oneshot::channel;
 
 const MINUTE: Duration = Duration::from_secs(60);
 
 const SKIP_PTR_UPDATES_THRESHOLD: Duration = Duration::from_secs(60 * 5);
+
 
 pub struct SubgraphRunner<C, T>
 where
@@ -36,6 +43,215 @@ where
     logger: Logger,
     metrics: RunnerMetrics,
 }
+
+// unsafe impl<C,T> Send for SubgraphRunner<C,T> 
+// where 
+//     C: Blockchain,
+//     T: RuntimeHostBuilder<C>,
+// {
+
+// }
+
+
+pub async fn run<C: Blockchain,T:RuntimeHostBuilder<C>>(mut arc_self:Arc<Mutex<SubgraphRunner<C,T>>>) -> Result<(), Error> {
+    // If a subgraph failed for deterministic reasons, before start indexing, we first
+    // revert the deployment head. It should lead to the same result since the error was
+    // deterministic.
+    {
+        let self_copy = arc_self.clone();
+        let self_mutex = self_copy.lock().await;
+        if let Some(current_ptr) = self_mutex.inputs.store.block_ptr() {
+            if let Some(parent_ptr) = self_mutex
+                .inputs
+                .triggers_adapter
+                .parent_ptr(&current_ptr)
+                .await?
+            {
+                // This reverts the deployment head to the parent_ptr if
+                // deterministic errors happened.
+                //
+                // There's no point in calling it if we have no current or parent block
+                // pointers, because there would be: no block to revert to or to search
+                // errors from (first execution).
+                let _outcome = self_mutex
+                    .inputs
+                    .store
+                    .unfail_deterministic_error(&current_ptr, &parent_ptr)
+                    .await?;
+            }
+        }
+    }
+
+    loop {
+        
+        let (mut blockstream_now,block_stream_cancel_handle_now) = {
+            let self_copy = arc_self.clone();
+            let self_mutex = self_copy.lock().await;
+
+            debug!(self_mutex.logger, "Starting or restarting subgraph");
+
+            let block_stream_canceler = CancelGuard::new();
+            let block_stream_cancel_handle = block_stream_canceler.handle();
+
+
+            let mut block_stream = new_block_stream(&self_mutex.inputs, &self_mutex.ctx.filter)
+                .await?
+                .map_err(CancelableError::Error)
+                .cancelable(&block_stream_canceler, || Err(CancelableError::Cancel));
+
+            // Keep the stream's cancel guard around to be able to shut it down when the subgraph
+            // deployment is unassigned
+            self_mutex.ctx
+                .instances
+                .write()
+                .unwrap()
+                .insert(self_mutex.inputs.deployment.id, block_stream_canceler);
+
+            debug!(self_mutex.logger, "Starting block stream");
+        
+            // Process events from the stream as long as no restart is needed
+
+            (block_stream,block_stream_cancel_handle)
+
+
+
+        };
+
+        loop{
+
+            let mut events = Vec::new();
+
+            {
+                let self_copy = arc_self.clone();
+                let mut self_mutex = self_copy.lock().await;
+                let _section = self_mutex.metrics.stream.stopwatch.start_section("scan_blocks");
+                let mut events_queue = Vec::new();
+                for _i in 0..2{
+                    let event = {
+                        blockstream_now.next().await
+                    };
+                    match event{
+                        Some(t)=>{events_queue.push(Some(t));},
+                        _ =>{}
+                    }
+                    
+                }
+
+                for _i in 0..events_queue.len(){
+                    let event_reverse = events_queue.pop().unwrap();
+                    events.push(event_reverse);
+
+
+                }
+            }
+
+            
+            let mut handles = vec![];
+            let mut action_for_return:Arc<Mutex<Vec<Result<Action,_>>>> = Arc::new(Mutex::new(Vec::new()));
+
+            for _i in 0..events.len(){
+                let self_copy = arc_self.clone();
+
+                let event = events.pop().unwrap();
+
+                let block_stream_cancel_handle_now_copy = block_stream_cancel_handle_now.clone();
+
+
+
+                // let mut self_mutex = self_copy.lock().await;
+
+                // let action = self_mutex.handle_stream_event(event, &block_stream_cancel_handle_now_copy).await?;
+
+                // action_for_return.push(action);
+
+
+
+                // try tokio ====> error say it doesn't impl send
+
+                let action_for_return_clone = action_for_return.clone();
+                let handle = tokio::spawn(async move {
+
+
+                    let mut self_mutex = self_copy.lock().await;
+                            // TODO: move cancel handle to the Context
+                        // This will require some code refactor in how the BlockStream is created
+                    let action = self_mutex.handle_stream_event(event, &block_stream_cancel_handle_now_copy)
+                        .await;
+                    
+                    let mut action_for_return_mutex = action_for_return_clone.lock().await;
+                    action_for_return_mutex.push(action);    
+
+                });
+
+
+                // try std spawn ====> error say it doesn't impl send 
+                // let handle = thread::spawn(move|| {
+                //     let runtime = tokio::runtime::Runtime::new().unwrap();  
+                    
+                //     let _ = runtime.block_on(runtime.spawn(async move {
+                //         let mut self_mutex = self_copy.lock().unwrap();
+                //         {self_mutex
+                //         .handle_stream_event(event, &block_stream_cancel_handle_now)
+                //         .await
+                //         }
+                //     }));       
+                //             // TODO: move cancel handle to the Context
+                //         // This will require some code refactor in how the BlockStream is created
+
+                // });
+                handles.push(handle);
+            }
+
+            for handle in handles{
+                let result = handle.await?;
+            }
+
+
+            // for handle in handles {
+            //     handle.join().unwrap();
+            // }
+
+
+
+            // {
+            //     Action::Continue => continue,
+            //     Action::Stop => {
+            //         info!(self_mutex.logger, "Stopping subgraph");
+            //         self_mutex.inputs.store.flush().await?;
+            //         return Ok(());
+            //     }
+            //     Action::Restart => break,
+            // };
+            let mut action_number = 0;
+
+            {
+                let self_copy = arc_self.clone();
+                let mut self_mutex = self_copy.lock().await;
+                let mut action_for_return_mutex = action_for_return.lock().await;
+                for i in 0..action_for_return_mutex.len(){
+                    let temp_action = action_for_return_mutex.pop().unwrap().unwrap();
+                    match temp_action{
+                        Action::Continue => continue,
+                        Action::Stop => {
+                            info!(self_mutex.logger, "Stopping subgraph");
+                            self_mutex.inputs.store.flush().await?;
+                            return Ok(());
+                        }
+                        Action::Restart => {action_number=1;break;},
+
+                    }
+
+                }
+            
+            }
+
+            if action_number==1{
+                break;
+            } 
+        }
+    }
+}
+
 
 impl<C, T> SubgraphRunner<C, T>
 where
@@ -63,77 +279,6 @@ where
         }
     }
 
-    pub async fn run(mut self) -> Result<(), Error> {
-        // If a subgraph failed for deterministic reasons, before start indexing, we first
-        // revert the deployment head. It should lead to the same result since the error was
-        // deterministic.
-        if let Some(current_ptr) = self.inputs.store.block_ptr() {
-            if let Some(parent_ptr) = self
-                .inputs
-                .triggers_adapter
-                .parent_ptr(&current_ptr)
-                .await?
-            {
-                // This reverts the deployment head to the parent_ptr if
-                // deterministic errors happened.
-                //
-                // There's no point in calling it if we have no current or parent block
-                // pointers, because there would be: no block to revert to or to search
-                // errors from (first execution).
-                let _outcome = self
-                    .inputs
-                    .store
-                    .unfail_deterministic_error(&current_ptr, &parent_ptr)
-                    .await?;
-            }
-        }
-
-        loop {
-            debug!(self.logger, "Starting or restarting subgraph");
-
-            let block_stream_canceler = CancelGuard::new();
-            let block_stream_cancel_handle = block_stream_canceler.handle();
-
-            let mut block_stream = new_block_stream(&self.inputs, &self.ctx.filter)
-                .await?
-                .map_err(CancelableError::Error)
-                .cancelable(&block_stream_canceler, || Err(CancelableError::Cancel));
-
-            // Keep the stream's cancel guard around to be able to shut it down when the subgraph
-            // deployment is unassigned
-            self.ctx
-                .instances
-                .write()
-                .unwrap()
-                .insert(self.inputs.deployment.id, block_stream_canceler);
-
-            debug!(self.logger, "Starting block stream");
-
-            // Process events from the stream as long as no restart is needed
-            loop {
-                let event = {
-                    let _section = self.metrics.stream.stopwatch.start_section("scan_blocks");
-
-                    block_stream.next().await
-                };
-
-                // TODO: move cancel handle to the Context
-                // This will require some code refactor in how the BlockStream is created
-                match self
-                    .handle_stream_event(event, &block_stream_cancel_handle)
-                    .await?
-                {
-                    Action::Continue => continue,
-                    Action::Stop => {
-                        info!(self.logger, "Stopping subgraph");
-                        self.inputs.store.flush().await?;
-                        return Ok(());
-                    }
-                    Action::Restart => break,
-                };
-            }
-        }
-    }
 
     /// Processes a block and returns the updated context and a boolean flag indicating
     /// whether new dynamic data sources have been added to the subgraph.

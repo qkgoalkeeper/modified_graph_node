@@ -1,3 +1,5 @@
+// use std::sync::Mutex;
+use tokio::sync::Mutex;
 use crate::subgraph::context::{IndexingContext, SharedInstanceKeepAliveMap};
 use crate::subgraph::inputs::IndexingInputs;
 use crate::subgraph::loader::load_dynamic_data_sources;
@@ -14,6 +16,7 @@ use graph_runtime_wasm::RuntimeHostBuilder;
 use tokio::task;
 
 use super::SubgraphTriggerProcessor;
+use super::runner::run;
 
 pub struct SubgraphInstanceManager<S: SubgraphStore> {
     logger_factory: LoggerFactory,
@@ -346,8 +349,8 @@ impl<S: SubgraphStore> SubgraphInstanceManager<S> {
         // it has a dedicated OS thread so the OS will handle the preemption. See
         // https://github.com/tokio-rs/tokio/issues/3493.
         graph::spawn_thread(deployment.to_string(), move || {
-            let runner = SubgraphRunner::new(inputs, ctx, logger.cheap_clone(), metrics);
-            if let Err(e) = graph::block_on(task::unconstrained(runner.run())) {
+            let runner = Arc::new(Mutex::new(SubgraphRunner::new(inputs, ctx, logger.cheap_clone(), metrics)));
+            if let Err(e) = graph::block_on(task::unconstrained(run(runner))) {
                 error!(
                     &logger,
                     "Subgraph instance failed to run: {}",

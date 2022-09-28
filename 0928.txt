@@ -1,0 +1,432 @@
+block used time: 0.000491679
+block used time: 0.000229712
+block used time: 0.000712466
+block used time: 0.000166158
+block used time: 0.000560544
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(39)  start  time: 2022-09-27 21:33:58:.343 
+thread ThreadId(41)  start  time: 2022-09-27 21:33:58:.343 
+thread ThreadId(42)  start  time: 2022-09-27 21:33:58:.353 
+thread ThreadId(40)  start  time: 2022-09-27 21:33:58:.354 
+thread ThreadId(41)  used time: 296 ms
+thread ThreadId(39)  used time: 306 ms
+thread ThreadId(40)  used time: 308 ms
+thread ThreadId(42)  used time: 309 ms
+block used time: 0.35816815
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(62)  start  time: 2022-09-27 21:33:58:.701 
+thread ThreadId(63)  start  time: 2022-09-27 21:33:58:.701 
+thread ThreadId(65)  start  time: 2022-09-27 21:33:58:.701 
+thread ThreadId(64)  start  time: 2022-09-27 21:33:58:.701 
+thread ThreadId(62)  used time: 257 ms
+thread ThreadId(64)  used time: 260 ms
+thread ThreadId(65)  used time: 269 ms
+thread ThreadId(63)  used time: 278 ms
+block used time: 0.317620938
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(74)  start  time: 2022-09-27 21:33:59:.004 
+thread ThreadId(76)  start  time: 2022-09-27 21:33:59:.004 
+thread ThreadId(75)  start  time: 2022-09-27 21:33:59:.004 
+thread ThreadId(73)  start  time: 2022-09-27 21:33:59:.004 
+thread ThreadId(74)  used time: 225 ms
+thread ThreadId(75)  used time: 235 ms
+thread ThreadId(76)  used time: 242 ms
+thread ThreadId(73)  used time: 246 ms
+block used time: 0.274237843
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(86)  start  time: 2022-09-27 21:33:59:.280 
+thread ThreadId(88)  start  time: 2022-09-27 21:33:59:.280 
+thread ThreadId(87)  start  time: 2022-09-27 21:33:59:.280 
+thread ThreadId(89)  start  time: 2022-09-27 21:33:59:.280 
+thread ThreadId(88)  used time: 231 ms
+thread ThreadId(89)  used time: 241 ms
+thread ThreadId(87)  used time: 254 ms
+thread ThreadId(86)  used time: 254 ms
+block used time: 0.285448881
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(99)  start  time: 2022-09-27 21:33:59:.566 
+thread ThreadId(100)  start  time: 2022-09-27 21:33:59:.566 
+thread ThreadId(102)  start  time: 2022-09-27 21:33:59:.570 
+thread ThreadId(101)  start  time: 2022-09-27 21:33:59:.570 
+thread ThreadId(101)  used time: 235 ms
+thread ThreadId(100)  used time: 242 ms
+thread ThreadId(102)  used time: 240 ms
+thread ThreadId(99)  used time: 247 ms
+block used time: 0.274325483
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(110)  start  time: 2022-09-27 21:33:59:.860 
+thread ThreadId(112)  start  time: 2022-09-27 21:33:59:.860 
+thread ThreadId(113)  start  time: 2022-09-27 21:33:59:.860 
+thread ThreadId(111)  start  time: 2022-09-27 21:33:59:.860 
+thread ThreadId(110)  used time: 232 ms
+thread ThreadId(111)  used time: 240 ms
+thread ThreadId(112)  used time: 245 ms
+thread ThreadId(113)  used time: 252 ms
+block used time: 0.300756627
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(122)  start  time: 2022-09-27 21:34:00:.144 
+thread ThreadId(120)  start  time: 2022-09-27 21:34:00:.144 
+thread ThreadId(121)  start  time: 2022-09-27 21:34:00:.144 
+thread ThreadId(123)  start  time: 2022-09-27 21:34:00:.144 
+thread ThreadId(123)  used time: 229 ms
+thread ThreadId(120)  used time: 231 ms
+thread ThreadId(121)  used time: 235 ms
+thread ThreadId(122)  used time: 236 ms
+block used time: 0.262427087
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(134)  start  time: 2022-09-27 21:34:00:.407 
+thread ThreadId(131)  start  time: 2022-09-27 21:34:00:.407 
+thread ThreadId(133)  start  time: 2022-09-27 21:34:00:.407 
+thread ThreadId(132)  start  time: 2022-09-27 21:34:00:.407 
+thread ThreadId(132)  used time: 239 ms
+thread ThreadId(131)  used time: 240 ms
+thread ThreadId(133)  used time: 241 ms
+thread ThreadId(134)  used time: 244 ms
+block used time: 0.270473367
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(145)  start  time: 2022-09-27 21:34:00:.678 
+thread ThreadId(144)  start  time: 2022-09-27 21:34:00:.678 
+thread ThreadId(147)  start  time: 2022-09-27 21:34:00:.678 
+thread ThreadId(146)  start  time: 2022-09-27 21:34:00:.678 
+thread ThreadId(146)  used time: 239 ms
+thread ThreadId(144)  used time: 253 ms
+thread ThreadId(145)  used time: 256 ms
+thread ThreadId(147)  used time: 257 ms
+block used time: 0.284376235
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(157)  start  time: 2022-09-27 21:34:00:.965 
+thread ThreadId(156)  start  time: 2022-09-27 21:34:00:.965 
+thread ThreadId(155)  start  time: 2022-09-27 21:34:00:.965 
+thread ThreadId(158)  start  time: 2022-09-27 21:34:00:.965 
+thread ThreadId(156)  used time: 230 ms
+thread ThreadId(157)  used time: 234 ms
+thread ThreadId(155)  used time: 235 ms
+thread ThreadId(158)  used time: 242 ms
+block used time: 0.277549998
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(168)  start  time: 2022-09-27 21:34:01:.243 
+thread ThreadId(167)  start  time: 2022-09-27 21:34:01:.243 
+thread ThreadId(169)  start  time: 2022-09-27 21:34:01:.243 
+thread ThreadId(170)  start  time: 2022-09-27 21:34:01:.243 
+thread ThreadId(169)  used time: 232 ms
+thread ThreadId(168)  used time: 241 ms
+thread ThreadId(170)  used time: 244 ms
+thread ThreadId(167)  used time: 253 ms
+block used time: 0.291212195
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(179)  start  time: 2022-09-27 21:34:01:.535 
+thread ThreadId(178)  start  time: 2022-09-27 21:34:01:.535 
+thread ThreadId(181)  start  time: 2022-09-27 21:34:01:.535 
+thread ThreadId(180)  start  time: 2022-09-27 21:34:01:.535 
+thread ThreadId(179)  used time: 240 ms
+thread ThreadId(180)  used time: 251 ms
+thread ThreadId(178)  used time: 252 ms
+thread ThreadId(181)  used time: 255 ms
+block used time: 0.286713745
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(206)  start  time: 2022-09-27 21:34:01:.824 
+thread ThreadId(205)  start  time: 2022-09-27 21:34:01:.824 
+thread ThreadId(207)  start  time: 2022-09-27 21:34:01:.824 
+thread ThreadId(208)  start  time: 2022-09-27 21:34:01:.824 
+thread ThreadId(205)  used time: 247 ms
+thread ThreadId(206)  used time: 258 ms
+thread ThreadId(208)  used time: 266 ms
+thread ThreadId(207)  used time: 288 ms
+block used time: 0.326512189
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(219)  start  time: 2022-09-27 21:34:02:.149 
+thread ThreadId(217)  start  time: 2022-09-27 21:34:02:.149 
+thread ThreadId(220)  start  time: 2022-09-27 21:34:02:.149 
+thread ThreadId(218)  start  time: 2022-09-27 21:34:02:.149 
+thread ThreadId(217)  used time: 237 ms
+thread ThreadId(220)  used time: 239 ms
+thread ThreadId(218)  used time: 243 ms
+thread ThreadId(219)  used time: 244 ms
+block used time: 0.282073738
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(481)  start  time: 2022-09-27 21:34:02:.431 
+thread ThreadId(482)  start  time: 2022-09-27 21:34:02:.431 
+thread ThreadId(483)  start  time: 2022-09-27 21:34:02:.431 
+thread ThreadId(484)  start  time: 2022-09-27 21:34:02:.431 
+thread ThreadId(483)  used time: 243 ms
+thread ThreadId(484)  used time: 245 ms
+thread ThreadId(481)  used time: 249 ms
+thread ThreadId(482)  used time: 249 ms
+block used time: 0.284633206
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(869)  start  time: 2022-09-27 21:34:02:.716 
+thread ThreadId(870)  start  time: 2022-09-27 21:34:02:.716 
+thread ThreadId(868)  start  time: 2022-09-27 21:34:02:.716 
+thread ThreadId(871)  start  time: 2022-09-27 21:34:02:.716 
+thread ThreadId(869)  used time: 238 ms
+thread ThreadId(870)  used time: 244 ms
+thread ThreadId(868)  used time: 245 ms
+thread ThreadId(871)  used time: 247 ms
+block used time: 0.284090047
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(878)  start  time: 2022-09-27 21:34:03:.003 
+thread ThreadId(879)  start  time: 2022-09-27 21:34:03:.003 
+thread ThreadId(880)  start  time: 2022-09-27 21:34:03:.003 
+thread ThreadId(881)  start  time: 2022-09-27 21:34:03:.003 
+thread ThreadId(879)  used time: 234 ms
+thread ThreadId(880)  used time: 236 ms
+thread ThreadId(881)  used time: 239 ms
+thread ThreadId(878)  used time: 240 ms
+block used time: 0.277597361
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(896)  start  time: 2022-09-27 21:34:03:.296 
+thread ThreadId(898)  start  time: 2022-09-27 21:34:03:.296 
+thread ThreadId(895)  start  time: 2022-09-27 21:34:03:.296 
+thread ThreadId(897)  start  time: 2022-09-27 21:34:03:.296 
+thread ThreadId(898)  used time: 229 ms
+thread ThreadId(895)  used time: 231 ms
+thread ThreadId(897)  used time: 236 ms
+thread ThreadId(896)  used time: 237 ms
+block used time: 0.291939618
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(908)  start  time: 2022-09-27 21:34:03:.573 
+thread ThreadId(910)  start  time: 2022-09-27 21:34:03:.573 
+thread ThreadId(909)  start  time: 2022-09-27 21:34:03:.573 
+thread ThreadId(911)  start  time: 2022-09-27 21:34:03:.573 
+thread ThreadId(911)  used time: 236 ms
+thread ThreadId(909)  used time: 240 ms
+thread ThreadId(910)  used time: 243 ms
+thread ThreadId(908)  used time: 245 ms
+block used time: 0.277598211
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(920)  start  time: 2022-09-27 21:34:03:.853 
+thread ThreadId(921)  start  time: 2022-09-27 21:34:03:.853 
+thread ThreadId(918)  start  time: 2022-09-27 21:34:03:.853 
+thread ThreadId(919)  start  time: 2022-09-27 21:34:03:.858 
+thread ThreadId(918)  used time: 238 ms
+thread ThreadId(920)  used time: 240 ms
+thread ThreadId(921)  used time: 241 ms
+thread ThreadId(919)  used time: 242 ms
+block used time: 0.289214313
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(928)  start  time: 2022-09-27 21:34:04:.141 
+thread ThreadId(929)  start  time: 2022-09-27 21:34:04:.141 
+thread ThreadId(930)  start  time: 2022-09-27 21:34:04:.141 
+thread ThreadId(931)  start  time: 2022-09-27 21:34:04:.141 
+thread ThreadId(928)  used time: 229 ms
+thread ThreadId(931)  used time: 236 ms
+thread ThreadId(929)  used time: 237 ms
+thread ThreadId(930)  used time: 242 ms
+block used time: 0.278155443
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(940)  start  time: 2022-09-27 21:34:04:.422 
+thread ThreadId(938)  start  time: 2022-09-27 21:34:04:.422 
+thread ThreadId(941)  start  time: 2022-09-27 21:34:04:.422 
+thread ThreadId(939)  start  time: 2022-09-27 21:34:04:.422 
+thread ThreadId(938)  used time: 236 ms
+thread ThreadId(940)  used time: 240 ms
+thread ThreadId(939)  used time: 245 ms
+thread ThreadId(941)  used time: 249 ms
+block used time: 0.291076832
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(953)  start  time: 2022-09-27 21:34:04:.713 
+thread ThreadId(955)  start  time: 2022-09-27 21:34:04:.713 
+thread ThreadId(954)  start  time: 2022-09-27 21:34:04:.713 
+thread ThreadId(956)  start  time: 2022-09-27 21:34:04:.713 
+thread ThreadId(953)  used time: 235 ms
+thread ThreadId(956)  used time: 238 ms
+thread ThreadId(954)  used time: 243 ms
+thread ThreadId(955)  used time: 245 ms
+block used time: 0.280266062
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(968)  start  time: 2022-09-27 21:34:04:.994 
+thread ThreadId(969)  start  time: 2022-09-27 21:34:04:.994 
+thread ThreadId(970)  start  time: 2022-09-27 21:34:04:.994 
+thread ThreadId(971)  start  time: 2022-09-27 21:34:04:.994 
+thread ThreadId(968)  used time: 228 ms
+thread ThreadId(969)  used time: 229 ms
+thread ThreadId(971)  used time: 232 ms
+thread ThreadId(970)  used time: 233 ms
+block used time: 0.268722505
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(983)  start  time: 2022-09-27 21:34:05:.263 
+thread ThreadId(984)  start  time: 2022-09-27 21:34:05:.264 
+thread ThreadId(985)  start  time: 2022-09-27 21:34:05:.264 
+thread ThreadId(986)  start  time: 2022-09-27 21:34:05:.264 
+thread ThreadId(986)  used time: 230 ms
+thread ThreadId(984)  used time: 239 ms
+thread ThreadId(983)  used time: 240 ms
+thread ThreadId(985)  used time: 239 ms
+block used time: 0.282501595
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(999)  start  time: 2022-09-27 21:34:05:.547 
+thread ThreadId(998)  start  time: 2022-09-27 21:34:05:.547 
+thread ThreadId(997)  start  time: 2022-09-27 21:34:05:.547 
+thread ThreadId(1000)  start  time: 2022-09-27 21:34:05:.547 
+thread ThreadId(998)  used time: 240 ms
+thread ThreadId(1000)  used time: 241 ms
+thread ThreadId(997)  used time: 241 ms
+thread ThreadId(999)  used time: 243 ms
+block used time: 0.280775101
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(1007)  start  time: 2022-09-27 21:34:05:.829 
+thread ThreadId(1008)  start  time: 2022-09-27 21:34:05:.829 
+thread ThreadId(1009)  start  time: 2022-09-27 21:34:05:.829 
+thread ThreadId(1010)  start  time: 2022-09-27 21:34:05:.829 
+thread ThreadId(1007)  used time: 251 ms
+thread ThreadId(1009)  used time: 251 ms
+thread ThreadId(1010)  used time: 257 ms
+thread ThreadId(1008)  used time: 262 ms
+block used time: 0.303155509
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(1018)  start  time: 2022-09-27 21:34:06:.132 
+thread ThreadId(1020)  start  time: 2022-09-27 21:34:06:.132 
+thread ThreadId(1019)  start  time: 2022-09-27 21:34:06:.132 
+thread ThreadId(1021)  start  time: 2022-09-27 21:34:06:.132 
+thread ThreadId(1018)  used time: 235 ms
+thread ThreadId(1020)  used time: 240 ms
+thread ThreadId(1021)  used time: 247 ms
+thread ThreadId(1019)  used time: 251 ms
+block used time: 0.292181309
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(1031)  start  time: 2022-09-27 21:34:06:.425 
+thread ThreadId(1030)  start  time: 2022-09-27 21:34:06:.425 
+thread ThreadId(1032)  start  time: 2022-09-27 21:34:06:.425 
+thread ThreadId(1033)  start  time: 2022-09-27 21:34:06:.426 
+thread ThreadId(1030)  used time: 234 ms
+thread ThreadId(1031)  used time: 238 ms
+thread ThreadId(1033)  used time: 238 ms
+thread ThreadId(1032)  used time: 249 ms
+block used time: 0.295986974
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(1043)  start  time: 2022-09-27 21:34:06:.723 
+thread ThreadId(1040)  start  time: 2022-09-27 21:34:06:.723 
+thread ThreadId(1041)  start  time: 2022-09-27 21:34:06:.723 
+thread ThreadId(1042)  start  time: 2022-09-27 21:34:06:.723 
+thread ThreadId(1041)  used time: 235 ms
+thread ThreadId(1043)  used time: 239 ms
+thread ThreadId(1042)  used time: 242 ms
+thread ThreadId(1040)  used time: 250 ms
+block used time: 0.296219399
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(1051)  start  time: 2022-09-27 21:34:07:.020 
+thread ThreadId(1052)  start  time: 2022-09-27 21:34:07:.020 
+thread ThreadId(1053)  start  time: 2022-09-27 21:34:07:.020 
+thread ThreadId(1054)  start  time: 2022-09-27 21:34:07:.020 
+thread ThreadId(1054)  used time: 242 ms
+thread ThreadId(1053)  used time: 248 ms
+thread ThreadId(1052)  used time: 250 ms
+thread ThreadId(1051)  used time: 250 ms
+block used time: 0.2975785
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(1089)  start  time: 2022-09-27 21:34:07:.319 
+thread ThreadId(1091)  start  time: 2022-09-27 21:34:07:.319 
+thread ThreadId(1090)  start  time: 2022-09-27 21:34:07:.319 
+thread ThreadId(1092)  start  time: 2022-09-27 21:34:07:.320 
+thread ThreadId(1091)  used time: 242 ms
+thread ThreadId(1089)  used time: 243 ms
+thread ThreadId(1092)  used time: 246 ms
+thread ThreadId(1090)  used time: 248 ms
+block used time: 0.296274781
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(1115)  start  time: 2022-09-27 21:34:07:.616 
+thread ThreadId(1117)  start  time: 2022-09-27 21:34:07:.616 
+thread ThreadId(1116)  start  time: 2022-09-27 21:34:07:.616 
+thread ThreadId(1118)  start  time: 2022-09-27 21:34:07:.616 
+thread ThreadId(1115)  used time: 242 ms
+thread ThreadId(1117)  used time: 245 ms
+thread ThreadId(1116)  used time: 249 ms
+thread ThreadId(1118)  used time: 252 ms
+block used time: 0.298947338
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(1126)  start  time: 2022-09-27 21:34:07:.926 
+thread ThreadId(1128)  start  time: 2022-09-27 21:34:07:.931 
+thread ThreadId(1127)  start  time: 2022-09-27 21:34:07:.936 
+thread ThreadId(1129)  start  time: 2022-09-27 21:34:07:.946 
+thread ThreadId(1127)  used time: 257 ms
+thread ThreadId(1129)  used time: 253 ms
+thread ThreadId(1128)  used time: 276 ms
+thread ThreadId(1126)  used time: 293 ms
+block used time: 0.348103783
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(1138)  start  time: 2022-09-27 21:34:08:.265 
+thread ThreadId(1141)  start  time: 2022-09-27 21:34:08:.265 
+thread ThreadId(1140)  start  time: 2022-09-27 21:34:08:.265 
+thread ThreadId(1139)  start  time: 2022-09-27 21:34:08:.265 
+thread ThreadId(1140)  used time: 238 ms
+thread ThreadId(1139)  used time: 243 ms
+thread ThreadId(1138)  used time: 247 ms
+thread ThreadId(1141)  used time: 254 ms
+block used time: 0.29750508
+triggers len: 1000 n_workers: 4 n_iter_group: 250 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(1154)  start  time: 2022-09-27 21:34:08:.563 
+thread ThreadId(1155)  start  time: 2022-09-27 21:34:08:.563 
+thread ThreadId(1153)  start  time: 2022-09-27 21:34:08:.563 
+thread ThreadId(1156)  start  time: 2022-09-27 21:34:08:.563 
