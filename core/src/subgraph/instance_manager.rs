@@ -1,3 +1,7 @@
+use std::time::Instant;
+
+use graph::util::backoff::ExponentialBackoff;
+use graph::util::lfu_cache::LfuCache;
 // use std::sync::Mutex;
 use tokio::sync::Mutex;
 use crate::subgraph::context::{IndexingContext, SharedInstanceKeepAliveMap};
@@ -16,7 +20,8 @@ use graph_runtime_wasm::RuntimeHostBuilder;
 use tokio::task;
 
 use super::SubgraphTriggerProcessor;
-use super::runner::run;
+use super::runner::{run, MINUTE};
+use super::state::IndexingState;
 
 pub struct SubgraphInstanceManager<S: SubgraphStore> {
     logger_factory: LoggerFactory,
@@ -349,7 +354,20 @@ impl<S: SubgraphStore> SubgraphInstanceManager<S> {
         // it has a dedicated OS thread so the OS will handle the preemption. See
         // https://github.com/tokio-rs/tokio/issues/3493.
         graph::spawn_thread(deployment.to_string(), move || {
-            let runner = Arc::new(Mutex::new(SubgraphRunner::new(inputs, ctx, logger.cheap_clone(), metrics)));
+            let mutexed_inputs = Arc::new(Mutex::new(inputs));
+            let mutexed_ctx =  Arc::new(Mutex::new(ctx));
+            let mutexed_logger =  Arc::new(Mutex::new(logger.cheap_clone()));
+            let mutexed_metrics =  Arc::new(Mutex::new(metrics));
+            let state_for_mutexed = IndexingState {
+                should_try_unfail_non_deterministic: true,
+                synced: false,
+                skip_ptr_updates_timer: Instant::now(),
+                backoff: ExponentialBackoff::new(MINUTE * 2, ENV_VARS.subgraph_error_retry_ceil),
+                entity_lfu_cache: LfuCache::new(),
+            };
+            let mutexed_state = Arc::new(Mutex::new(state_for_mutexed));
+
+            let runner = SubgraphRunner::new(mutexed_inputs, mutexed_ctx,mutexed_state, mutexed_logger, mutexed_metrics);
             if let Err(e) = graph::block_on(task::unconstrained(run(runner))) {
                 error!(
                     &logger,

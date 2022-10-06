@@ -314,26 +314,27 @@ pub fn transact_block(
     .execute(conn)
     .map_err(StoreError::from)?;
 
-    match row_count {
-        // Common case: A single row was updated.
-        1 => Ok(()),
+    // match row_count {
+    //     // Common case: A single row was updated.
+    //     1 => Ok(()),
 
-        // No matching rows were found. This is an error. By the filter conditions, this can only be
-        // due to a missing deployment (which `block_ptr` catches) or duplicate block processing.
-        0 => match block_ptr(&conn, &site.deployment)? {
-            Some(block_ptr_from) if block_ptr_from.number >= ptr.number => Err(
-                StoreError::DuplicateBlockProcessing(site.deployment.clone(), ptr.number),
-            ),
-            None | Some(_) => Err(StoreError::Unknown(anyhow!(
-                "unknown error forwarding block ptr"
-            ))),
-        },
+    //     // No matching rows were found. This is an error. By the filter conditions, this can only be
+    //     // due to a missing deployment (which `block_ptr` catches) or duplicate block processing.
+    //     // 0 => match block_ptr(&conn, &site.deployment)? {
+    //     //     Some(block_ptr_from) if block_ptr_from.number >= ptr.number => Err(
+    //     //         StoreError::DuplicateBlockProcessing(site.deployment.clone(), ptr.number),
+    //     //     ),
+    //     //     None | Some(_) => Err(StoreError::Unknown(anyhow!(
+    //     //         "unknown error forwarding block ptr"
+    //     //     ))),
+    //     // },
 
-        // More than one matching row was found.
-        _ => Err(StoreError::ConstraintViolation(
-            "duplicate deployments in shard".to_owned(),
-        )),
-    }
+    //     // More than one matching row was found.
+    //     _ => Err(StoreError::ConstraintViolation(
+    //         "duplicate deployments in shard".to_owned(),
+    //     )),
+    // }
+    Ok(())
 }
 
 pub fn forward_block_ptr(
@@ -363,26 +364,27 @@ pub fn forward_block_ptr(
     .execute(conn)
     .map_err(StoreError::from)?;
 
-    match row_count {
-        // Common case: A single row was updated.
-        1 => Ok(()),
+    // match row_count {
+    //     // Common case: A single row was updated.
+    //     1 => Ok(()),
 
-        // No matching rows were found. This is an error. By the filter conditions, this can only be
-        // due to a missing deployment (which `block_ptr` catches) or duplicate block processing.
-        0 => match block_ptr(conn, id)? {
-            Some(block_ptr_from) if block_ptr_from.number >= ptr.number => {
-                Err(StoreError::DuplicateBlockProcessing(id.clone(), ptr.number))
-            }
-            None | Some(_) => Err(StoreError::Unknown(anyhow!(
-                "unknown error forwarding block ptr"
-            ))),
-        },
+    //     // No matching rows were found. This is an error. By the filter conditions, this can only be
+    //     // due to a missing deployment (which `block_ptr` catches) or duplicate block processing.
+    //     0 => match block_ptr(conn, id)? {
+    //         Some(block_ptr_from) if block_ptr_from.number >= ptr.number => {
+    //             Err(StoreError::DuplicateBlockProcessing(id.clone(), ptr.number))
+    //         }
+    //         None | Some(_) => Err(StoreError::Unknown(anyhow!(
+    //             "unknown error forwarding block ptr"
+    //         ))),
+    //     },
 
-        // More than one matching row was found.
-        _ => Err(StoreError::ConstraintViolation(
-            "duplicate deployments in shard".to_owned(),
-        )),
-    }
+    //     // More than one matching row was found.
+    //     _ => Err(StoreError::ConstraintViolation(
+    //         "duplicate deployments in shard".to_owned(),
+    //     )),
+    // }
+    Ok(())
 }
 
 pub fn get_subgraph_firehose_cursor(

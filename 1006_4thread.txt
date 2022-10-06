@@ -1,0 +1,366 @@
+block used time: 0.002373237
+block used time: 0.00145578
+block used time: 0.002987061
+block used time: 0.003363656
+triggers len: 8 n_workers: 4 n_iter_group: 2 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(39)  start  time: 2022-10-06 04:36:49:.905 
+thread ThreadId(40)  start  time: 2022-10-06 04:36:49:.905 
+thread ThreadId(41)  start  time: 2022-10-06 04:36:49:.905 
+thread ThreadId(39)  used time: 1 ms
+thread ThreadId(40)  used time: 1 ms
+thread ThreadId(42)  start  time: 2022-10-06 04:36:49:.906 
+thread ThreadId(41)  used time: 1 ms
+thread ThreadId(42)  used time: 0 ms
+triggers len: 8 n_workers: 4 n_iter_group: 2 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(52)  start  time: 2022-10-06 04:36:49:.915 
+thread ThreadId(54)  start  time: 2022-10-06 04:36:49:.915 
+thread ThreadId(51)  start  time: 2022-10-06 04:36:49:.915 
+thread ThreadId(53)  start  time: 2022-10-06 04:36:49:.916 
+thread ThreadId(52)  used time: 0 ms
+thread ThreadId(54)  used time: 1 ms
+thread ThreadId(51)  used time: 1 ms
+thread ThreadId(53)  used time: 1 ms
+block used time: 0.023072825
+triggers len: 8 n_workers: 4 n_iter_group: 2 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(68)  start  time: 2022-10-06 04:36:49:.928 
+thread ThreadId(67)  start  time: 2022-10-06 04:36:49:.928 
+thread ThreadId(69)  start  time: 2022-10-06 04:36:49:.928 
+thread ThreadId(70)  start  time: 2022-10-06 04:36:49:.928 
+thread ThreadId(67)  used time: 0 ms
+thread ThreadId(69)  used time: 0 ms
+thread ThreadId(70)  used time: 0 ms
+thread ThreadId(68)  used time: 1 ms
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xecfae2387ed35c2ad529fbd3e90825820482994d" }
+Some(Entity({"operation": Int(-1), "delta": BigInt(100), "id": Bytes(0xecfae2387ed35c2ad529fbd3e90825820482994d)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x1679273975bf5717f8ffba6cdb576887d36c7d0b" }
+Some(Entity({"delta": BigInt(100), "operation": Int(1), "id": Bytes(0x1679273975bf5717f8ffba6cdb576887d36c7d0b)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x34817847ac013cffe456a9f8ad3086ad228a8fb9" }
+Some(Entity({"delta": BigInt(100), "operation": Int(1), "id": Bytes(0x34817847ac013cffe456a9f8ad3086ad228a8fb9)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x23d2efd577dfe6a75c281ce9787488a093308af8" }
+Some(Entity({"operation": Int(1), "id": Bytes(0x23d2efd577dfe6a75c281ce9787488a093308af8), "delta": BigInt(100)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x56241f9952f269707c2e58bdd8ea2b0fb2a80844" }
+Some(Entity({"operation": Int(-1), "delta": BigInt(100), "id": Bytes(0x56241f9952f269707c2e58bdd8ea2b0fb2a80844)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xb7d208401141f38343975f8f361f566252505f99" }
+Some(Entity({"operation": Int(1), "delta": BigInt(100), "id": Bytes(0xb7d208401141f38343975f8f361f566252505f99)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x019bbc3cb78f3e6d55575d765ba59ddc11d99edc" }
+Some(Entity({"operation": Int(-1), "delta": BigInt(100), "id": Bytes(0x019bbc3cb78f3e6d55575d765ba59ddc11d99edc)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xa41900671d220a84f12857d092a5ae82eecaa61e" }
+Some(Entity({"delta": BigInt(100), "id": Bytes(0xa41900671d220a84f12857d092a5ae82eecaa61e), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x612f78079d69968c4cacb011601ff103f5dc6029" }
+Some(Entity({"id": Bytes(0x612f78079d69968c4cacb011601ff103f5dc6029), "delta": BigInt(100), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xb0a82a96c93e54b3146e04bf87db1dc54e913814" }
+Some(Entity({"id": Bytes(0xb0a82a96c93e54b3146e04bf87db1dc54e913814), "operation": Int(1), "delta": BigInt(100)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x0c5118062d1dfd123a318ab9c00109bedb37a95e" }
+Some(Entity({"id": Bytes(0x0c5118062d1dfd123a318ab9c00109bedb37a95e), "operation": Int(-1), "delta": BigInt(100)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x76881ba401d791e4e6d94353e1679f6d7a0d11ec" }
+Some(Entity({"operation": Int(1), "delta": BigInt(100), "id": Bytes(0x76881ba401d791e4e6d94353e1679f6d7a0d11ec)}))
+block used time: 0.036069464
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x08b178f7047241eb54ed823df6ae1ded10cb5e73" }
+Some(Entity({"operation": Int(1), "id": Bytes(0x08b178f7047241eb54ed823df6ae1ded10cb5e73), "delta": BigInt(200)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x3c9dea86e7316ad52d005299ec5ee686856afb01" }
+Some(Entity({"operation": Int(-1), "delta": BigInt(200), "id": Bytes(0x3c9dea86e7316ad52d005299ec5ee686856afb01)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x4bd03ec84995384695a117f16a9e76aaac36f7d1" }
+Some(Entity({"delta": BigInt(200), "id": Bytes(0x4bd03ec84995384695a117f16a9e76aaac36f7d1), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xb7004f57af5d821dd8c6f46e34342101ce0120ff" }
+Some(Entity({"operation": Int(1), "delta": BigInt(200), "id": Bytes(0xb7004f57af5d821dd8c6f46e34342101ce0120ff)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x206a4bfbd19a55de6864883796e5ee2571cc66e3" }
+Some(Entity({"id": Bytes(0x206a4bfbd19a55de6864883796e5ee2571cc66e3), "operation": Int(-1), "delta": BigInt(200)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x482d1de2e6d8c1ed62e21777ef83fc2d96dd0cfd" }
+Some(Entity({"id": Bytes(0x482d1de2e6d8c1ed62e21777ef83fc2d96dd0cfd), "delta": BigInt(200), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x35a107bea24e2ef730f77d486dd99e164c9ac7ae" }
+Some(Entity({"delta": BigInt(200), "operation": Int(-1), "id": Bytes(0x35a107bea24e2ef730f77d486dd99e164c9ac7ae)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xcaafc522540b8ff71b87c568a5bacd4f8ab6be2a" }
+Some(Entity({"id": Bytes(0xcaafc522540b8ff71b87c568a5bacd4f8ab6be2a), "delta": BigInt(200), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x68c1bb428b45a43165682e79512422535568f647" }
+Some(Entity({"id": Bytes(0x68c1bb428b45a43165682e79512422535568f647), "operation": Int(1), "delta": BigInt(200)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xecfae2387ed35c2ad529fbd3e90825820482994d" }
+Some(Entity({"operation": Int(-1), "delta": BigInt(200), "id": Bytes(0xecfae2387ed35c2ad529fbd3e90825820482994d)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xb7d208401141f38343975f8f361f566252505f99" }
+Some(Entity({"operation": Int(1), "delta": BigInt(200), "id": Bytes(0xb7d208401141f38343975f8f361f566252505f99)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x64a8eba6ee2cd4dd38671073cc646548b91ce73e" }
+Some(Entity({"operation": Int(1), "id": Bytes(0x64a8eba6ee2cd4dd38671073cc646548b91ce73e), "delta": BigInt(200)}))
+block used time: 0.038965579
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x2b3874ff97310ec583be94bfecb808222f4c9dd8" }
+Some(Entity({"id": Bytes(0x2b3874ff97310ec583be94bfecb808222f4c9dd8), "operation": Int(-1), "delta": BigInt(300)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xa302abe049002d3277b3b26ac37c51d932722e4b" }
+Some(Entity({"operation": Int(-1), "id": Bytes(0xa302abe049002d3277b3b26ac37c51d932722e4b), "delta": BigInt(300)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xecfae2387ed35c2ad529fbd3e90825820482994d" }
+Some(Entity({"operation": Int(-1), "delta": BigInt(300), "id": Bytes(0xecfae2387ed35c2ad529fbd3e90825820482994d)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xb2d465c93242ff6d7c8d6ba6688808009e802d73" }
+Some(Entity({"delta": BigInt(300), "id": Bytes(0xb2d465c93242ff6d7c8d6ba6688808009e802d73), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x805cb23e83806ee258efca39390bddb4c70f5b6b" }
+Some(Entity({"delta": BigInt(300), "id": Bytes(0x805cb23e83806ee258efca39390bddb4c70f5b6b), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xb7d208401141f38343975f8f361f566252505f99" }
+Some(Entity({"operation": Int(1), "delta": BigInt(300), "id": Bytes(0xb7d208401141f38343975f8f361f566252505f99)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xe84133b5a072d1b01f6c30b114594aa4b9e36dd8" }
+Some(Entity({"operation": Int(1), "id": Bytes(0xe84133b5a072d1b01f6c30b114594aa4b9e36dd8), "delta": BigInt(300)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x5bb47374f98d4eef153b1c3b389f31582c5aa09f" }
+Some(Entity({"delta": BigInt(300), "operation": Int(-1), "id": Bytes(0x5bb47374f98d4eef153b1c3b389f31582c5aa09f)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x4dfa80cf9af7e9347ff363046d53d1de326f4bad" }
+Some(Entity({"delta": BigInt(300), "id": Bytes(0x4dfa80cf9af7e9347ff363046d53d1de326f4bad), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x4a5bdc353ecd6a791d203dbfcfe91251f2d39075" }
+Some(Entity({"delta": BigInt(300), "id": Bytes(0x4a5bdc353ecd6a791d203dbfcfe91251f2d39075), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xd4f8403601aca13586310dacec5e39dbd9aa5924" }
+Some(Entity({"id": Bytes(0xd4f8403601aca13586310dacec5e39dbd9aa5924), "operation": Int(1), "delta": BigInt(300)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x6a5bfca703fee1cdbb04f7a86971a0d32b72f18f" }
+Some(Entity({"operation": Int(1), "delta": BigInt(300), "id": Bytes(0x6a5bfca703fee1cdbb04f7a86971a0d32b72f18f)}))
+block used time: 0.040335103
+triggers len: 8 n_workers: 4 n_iter_group: 2 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(75)  start  time: 2022-10-06 04:36:49:.947 
+thread ThreadId(76)  start  time: 2022-10-06 04:36:49:.947 
+thread ThreadId(77)  start  time: 2022-10-06 04:36:49:.947 
+thread ThreadId(78)  start  time: 2022-10-06 04:36:49:.947 
+thread ThreadId(75)  used time: 1 ms
+thread ThreadId(78)  used time: 1 ms
+thread ThreadId(76)  used time: 1 ms
+thread ThreadId(77)  used time: 1 ms
+triggers len: 8 n_workers: 4 n_iter_group: 2 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(102)  start  time: 2022-10-06 04:36:49:.959 
+thread ThreadId(104)  start  time: 2022-10-06 04:36:49:.959 
+thread ThreadId(103)  start  time: 2022-10-06 04:36:49:.959 
+thread ThreadId(105)  start  time: 2022-10-06 04:36:49:.959 
+thread ThreadId(102)  used time: 1 ms
+thread ThreadId(103)  used time: 1 ms
+thread ThreadId(104)  used time: 1 ms
+thread ThreadId(105)  used time: 1 ms
+triggers len: 8 n_workers: 4 n_iter_group: 2 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(117)  start  time: 2022-10-06 04:36:49:.972 
+thread ThreadId(120)  start  time: 2022-10-06 04:36:49:.972 
+thread ThreadId(118)  start  time: 2022-10-06 04:36:49:.972 
+thread ThreadId(119)  start  time: 2022-10-06 04:36:49:.972 
+thread ThreadId(117)  used time: 1 ms
+thread ThreadId(120)  used time: 1 ms
+thread ThreadId(118)  used time: 1 ms
+thread ThreadId(119)  used time: 1 ms
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xa30283a41078ba1e741e94bd0277fdc6aab7c5d1" }
+Some(Entity({"delta": BigInt(400), "operation": Int(-1), "id": Bytes(0xa30283a41078ba1e741e94bd0277fdc6aab7c5d1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xbd729a8df1c9ccc1b913bb1a494b93be596afba5" }
+Some(Entity({"delta": BigInt(400), "operation": Int(1), "id": Bytes(0xbd729a8df1c9ccc1b913bb1a494b93be596afba5)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xa837ab60b311d0079797b3bae01ad62950c3b405" }
+Some(Entity({"delta": BigInt(400), "id": Bytes(0xa837ab60b311d0079797b3bae01ad62950c3b405), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xb7d208401141f38343975f8f361f566252505f99" }
+Some(Entity({"operation": Int(1), "delta": BigInt(400), "id": Bytes(0xb7d208401141f38343975f8f361f566252505f99)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xecfae2387ed35c2ad529fbd3e90825820482994d" }
+Some(Entity({"id": Bytes(0xecfae2387ed35c2ad529fbd3e90825820482994d), "delta": BigInt(400), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xaa596883cf8f57de12ebc813e2f72fac7cbc929f" }
+Some(Entity({"operation": Int(1), "id": Bytes(0xaa596883cf8f57de12ebc813e2f72fac7cbc929f), "delta": BigInt(400)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x6ded7de5b69d2ca7f35dc8f8974b2ebef86dda2e" }
+Some(Entity({"operation": Int(-1), "id": Bytes(0x6ded7de5b69d2ca7f35dc8f8974b2ebef86dda2e), "delta": BigInt(400)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x929af3fa9d7970bc46c78dc5de7e674a41c3a36b" }
+Some(Entity({"id": Bytes(0x929af3fa9d7970bc46c78dc5de7e674a41c3a36b), "operation": Int(1), "delta": BigInt(400)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xec5e419f897ae9d4e35b7b3605b40ff33583e567" }
+Some(Entity({"delta": BigInt(400), "id": Bytes(0xec5e419f897ae9d4e35b7b3605b40ff33583e567), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xcf8be77e36fda4f5a44376cef48041e49ea1704a" }
+Some(Entity({"operation": Int(-1), "delta": BigInt(400), "id": Bytes(0xcf8be77e36fda4f5a44376cef48041e49ea1704a)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x868e17e4b9428188e1b4f1063da4284829a8770d" }
+Some(Entity({"delta": BigInt(400), "id": Bytes(0x868e17e4b9428188e1b4f1063da4284829a8770d), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xdb7b2166c7536c3d0f925a4863f66a36aabd1557" }
+Some(Entity({"id": Bytes(0xdb7b2166c7536c3d0f925a4863f66a36aabd1557), "operation": Int(1), "delta": BigInt(400)}))
+block used time: 0.036768267
+triggers len: 8 n_workers: 4 n_iter_group: 2 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(132)  start  time: 2022-10-06 04:36:49:.983 
+thread ThreadId(134)  start  time: 2022-10-06 04:36:49:.983 
+thread ThreadId(133)  start  time: 2022-10-06 04:36:49:.983 
+thread ThreadId(135)  start  time: 2022-10-06 04:36:49:.983 
+thread ThreadId(134)  used time: 0 ms
+thread ThreadId(132)  used time: 0 ms
+thread ThreadId(133)  used time: 0 ms
+thread ThreadId(135)  used time: 1 ms
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x85d80e182cf3014f6d419905a2b4d6bfcfe0680c" }
+Some(Entity({"operation": Int(1), "delta": BigInt(500), "id": Bytes(0x85d80e182cf3014f6d419905a2b4d6bfcfe0680c)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x3585eb05629fcfae87e866f8785f1a0359580744" }
+Some(Entity({"operation": Int(-1), "delta": BigInt(500), "id": Bytes(0x3585eb05629fcfae87e866f8785f1a0359580744)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x6de91126a27d3ea882c0b95a8619549f8ade80c7" }
+Some(Entity({"id": Bytes(0x6de91126a27d3ea882c0b95a8619549f8ade80c7), "operation": Int(-1), "delta": BigInt(500)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x5aab6fac0db41af89d1c9e3545f2d0108a6c5096" }
+Some(Entity({"delta": BigInt(500), "id": Bytes(0x5aab6fac0db41af89d1c9e3545f2d0108a6c5096), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x4fd11eeddc9f761281952c43210b7fb76b649a2a" }
+Some(Entity({"delta": BigInt(500), "id": Bytes(0x4fd11eeddc9f761281952c43210b7fb76b649a2a), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xecfae2387ed35c2ad529fbd3e90825820482994d" }
+Some(Entity({"id": Bytes(0xecfae2387ed35c2ad529fbd3e90825820482994d), "delta": BigInt(500), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x0c66d00c9d22404674ad26028d72793d47c27719" }
+Some(Entity({"operation": Int(1), "delta": BigInt(500), "id": Bytes(0x0c66d00c9d22404674ad26028d72793d47c27719)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x2300d983267a2ee3c5afd8f4e490ca7ece0d3b04" }
+Some(Entity({"id": Bytes(0x2300d983267a2ee3c5afd8f4e490ca7ece0d3b04), "delta": BigInt(500), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xf70009396f7e94df0ad4ae9d5fa3869d49ff182b" }
+Some(Entity({"operation": Int(-1), "id": Bytes(0xf70009396f7e94df0ad4ae9d5fa3869d49ff182b), "delta": BigInt(500)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xf7c7c333696bb071d971dceb4e7dfdb9d3e0a921" }
+Some(Entity({"id": Bytes(0xf7c7c333696bb071d971dceb4e7dfdb9d3e0a921), "delta": BigInt(500), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x0a463cad86686efd9427069505b4234c9b4d87dd" }
+Some(Entity({"operation": Int(1), "delta": BigInt(500), "id": Bytes(0x0a463cad86686efd9427069505b4234c9b4d87dd)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xb7d208401141f38343975f8f361f566252505f99" }
+Some(Entity({"operation": Int(1), "delta": BigInt(500), "id": Bytes(0xb7d208401141f38343975f8f361f566252505f99)}))
+block used time: 0.047931396
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x8beedda77dcd5d4b6085362c5af611a213d91c7d" }
+Some(Entity({"delta": BigInt(600), "id": Bytes(0x8beedda77dcd5d4b6085362c5af611a213d91c7d), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xa5a918c4ebcc542b4173ea8846e79df1838bd70d" }
+Some(Entity({"id": Bytes(0xa5a918c4ebcc542b4173ea8846e79df1838bd70d), "delta": BigInt(600), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xecfae2387ed35c2ad529fbd3e90825820482994d" }
+Some(Entity({"id": Bytes(0xecfae2387ed35c2ad529fbd3e90825820482994d), "delta": BigInt(600), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x336e6af0b2c1e9a546cf4025bca12f162ea2adbf" }
+Some(Entity({"delta": BigInt(600), "id": Bytes(0x336e6af0b2c1e9a546cf4025bca12f162ea2adbf), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x5930ceb0e55ab430ed88e6c87dbd48738b8e5e03" }
+Some(Entity({"delta": BigInt(600), "id": Bytes(0x5930ceb0e55ab430ed88e6c87dbd48738b8e5e03), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xb7d208401141f38343975f8f361f566252505f99" }
+Some(Entity({"operation": Int(1), "delta": BigInt(600), "id": Bytes(0xb7d208401141f38343975f8f361f566252505f99)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xbca835eff3898d81c83a8e2ad21354aefd1c027f" }
+Some(Entity({"operation": Int(1), "delta": BigInt(600), "id": Bytes(0xbca835eff3898d81c83a8e2ad21354aefd1c027f)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x6ff1b8fc9eb30c582d724096e79609c7e500968d" }
+Some(Entity({"delta": BigInt(600), "id": Bytes(0x6ff1b8fc9eb30c582d724096e79609c7e500968d), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x64a203461a16ffadd12c84a9bd3ff30095cd61e2" }
+Some(Entity({"operation": Int(-1), "id": Bytes(0x64a203461a16ffadd12c84a9bd3ff30095cd61e2), "delta": BigInt(600)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x23741aa5071185fd6e3b59a90b1db669ec3c9be1" }
+Some(Entity({"delta": BigInt(600), "id": Bytes(0x23741aa5071185fd6e3b59a90b1db669ec3c9be1), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x4e8c403f6a48deb69a2fbb5c85d82dfc9948357b" }
+Some(Entity({"delta": BigInt(600), "id": Bytes(0x4e8c403f6a48deb69a2fbb5c85d82dfc9948357b), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x8b338a8eb652db6f36bca55e6d27ae81f0a980e5" }
+Some(Entity({"delta": BigInt(600), "id": Bytes(0x8b338a8eb652db6f36bca55e6d27ae81f0a980e5), "operation": Int(-1)}))
+block used time: 0.049508467
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x49364b499cb82628425d0bf7ce655d461bd40fbd" }
+Some(Entity({"operation": Int(1), "delta": BigInt(700), "id": Bytes(0x49364b499cb82628425d0bf7ce655d461bd40fbd)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x116fff669048fcf3c2541f8cde317ecc9d439980" }
+Some(Entity({"id": Bytes(0x116fff669048fcf3c2541f8cde317ecc9d439980), "delta": BigInt(700), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xecfae2387ed35c2ad529fbd3e90825820482994d" }
+Some(Entity({"id": Bytes(0xecfae2387ed35c2ad529fbd3e90825820482994d), "delta": BigInt(700), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xb7d208401141f38343975f8f361f566252505f99" }
+Some(Entity({"operation": Int(1), "delta": BigInt(700), "id": Bytes(0xb7d208401141f38343975f8f361f566252505f99)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x9f1c7297edae14fd2750b16bd049f35eb5bf442d" }
+Some(Entity({"delta": BigInt(700), "id": Bytes(0x9f1c7297edae14fd2750b16bd049f35eb5bf442d), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x0479e28d518cd36a6dc072629996cb21d19bae19" }
+Some(Entity({"id": Bytes(0x0479e28d518cd36a6dc072629996cb21d19bae19), "delta": BigInt(700), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xd273d66f3455a44e35d7ea5d435d6980c5a30d23" }
+Some(Entity({"delta": BigInt(700), "id": Bytes(0xd273d66f3455a44e35d7ea5d435d6980c5a30d23), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xe37470ae04f07d9f4fc7dad722e112f2fec033ca" }
+Some(Entity({"id": Bytes(0xe37470ae04f07d9f4fc7dad722e112f2fec033ca), "operation": Int(-1), "delta": BigInt(700)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xd9860d130bab30506ba74a52127a76687a98c72d" }
+Some(Entity({"delta": BigInt(700), "operation": Int(-1), "id": Bytes(0xd9860d130bab30506ba74a52127a76687a98c72d)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x3f7734b021476d14a4254fe40fe0a858b84d14f0" }
+Some(Entity({"operation": Int(1), "id": Bytes(0x3f7734b021476d14a4254fe40fe0a858b84d14f0), "delta": BigInt(700)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xab380669782fa616165a38a4f05227f4340ac9c6" }
+Some(Entity({"id": Bytes(0xab380669782fa616165a38a4f05227f4340ac9c6), "operation": Int(-1), "delta": BigInt(700)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x99fb01ca40859da054fce0d565daf55c4ecb6f52" }
+Some(Entity({"delta": BigInt(700), "id": Bytes(0x99fb01ca40859da054fce0d565daf55c4ecb6f52), "operation": Int(-1)}))
+block used time: 0.051116177
+triggers len: 8 n_workers: 4 n_iter_group: 2 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(153)  start  time: 2022-10-06 04:36:50:.000 
+thread ThreadId(154)  start  time: 2022-10-06 04:36:50:.000 
+thread ThreadId(155)  start  time: 2022-10-06 04:36:50:.000 
+thread ThreadId(156)  start  time: 2022-10-06 04:36:50:.000 
+thread ThreadId(154)  used time: 0 ms
+thread ThreadId(153)  used time: 1 ms
+thread ThreadId(156)  used time: 1 ms
+thread ThreadId(155)  used time: 1 ms
+triggers len: 8 n_workers: 4 n_iter_group: 2 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(161)  start  time: 2022-10-06 04:36:50:.011 
+thread ThreadId(162)  start  time: 2022-10-06 04:36:50:.011 
+thread ThreadId(164)  start  time: 2022-10-06 04:36:50:.011 
+thread ThreadId(163)  start  time: 2022-10-06 04:36:50:.011 
+thread ThreadId(161)  used time: 0 ms
+thread ThreadId(164)  used time: 0 ms
+thread ThreadId(162)  used time: 1 ms
+thread ThreadId(163)  used time: 1 ms
+triggers len: 8 n_workers: 4 n_iter_group: 2 
+trigger_groups len: 4
+init time: 0 ms
+thread ThreadId(171)  start  time: 2022-10-06 04:36:50:.023 
+thread ThreadId(172)  start  time: 2022-10-06 04:36:50:.023 
+thread ThreadId(173)  start  time: 2022-10-06 04:36:50:.023 
+thread ThreadId(174)  start  time: 2022-10-06 04:36:50:.023 
+thread ThreadId(172)  used time: 1 ms
+thread ThreadId(174)  used time: 1 ms
+thread ThreadId(171)  used time: 1 ms
+thread ThreadId(173)  used time: 1 ms
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x61646ceb980155cea806149b961e8814687f91b9" }
+Some(Entity({"operation": Int(-1), "delta": BigInt(800), "id": Bytes(0x61646ceb980155cea806149b961e8814687f91b9)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xb7d208401141f38343975f8f361f566252505f99" }
+Some(Entity({"delta": BigInt(800), "operation": Int(1), "id": Bytes(0xb7d208401141f38343975f8f361f566252505f99)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xed880bb6601e7abb29ce060ae593794076e1c512" }
+Some(Entity({"operation": Int(-1), "id": Bytes(0xed880bb6601e7abb29ce060ae593794076e1c512), "delta": BigInt(800)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x38c6cb26863835ad1db240fa6918b85d2246b9cb" }
+Some(Entity({"operation": Int(1), "id": Bytes(0x38c6cb26863835ad1db240fa6918b85d2246b9cb), "delta": BigInt(800)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xdc9948db83c7c7fc912d0fb78bf22f0442ad11e3" }
+Some(Entity({"id": Bytes(0xdc9948db83c7c7fc912d0fb78bf22f0442ad11e3), "delta": BigInt(800), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x00317f35ce6a1cbc1a623e60deece7994a7a34c1" }
+Some(Entity({"id": Bytes(0x00317f35ce6a1cbc1a623e60deece7994a7a34c1), "delta": BigInt(800), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xeceff14a0ce0ca252b1e5121263129a43f22d47d" }
+Some(Entity({"delta": BigInt(800), "id": Bytes(0xeceff14a0ce0ca252b1e5121263129a43f22d47d), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x416a0510b85961455d07b4257c4ed245e244a8e8" }
+Some(Entity({"id": Bytes(0x416a0510b85961455d07b4257c4ed245e244a8e8), "operation": Int(-1), "delta": BigInt(800)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x7f78237a99c89e9ddc8fdcdc58299df9c5b09ce2" }
+Some(Entity({"delta": BigInt(800), "id": Bytes(0x7f78237a99c89e9ddc8fdcdc58299df9c5b09ce2), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x2df355fbe20bc0a3d9a40347805583c897f24a6d" }
+Some(Entity({"operation": Int(-1), "delta": BigInt(800), "id": Bytes(0x2df355fbe20bc0a3d9a40347805583c897f24a6d)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x1d720f19a7df52074faa67d54938904097a7f58a" }
+Some(Entity({"delta": BigInt(800), "id": Bytes(0x1d720f19a7df52074faa67d54938904097a7f58a), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xecfae2387ed35c2ad529fbd3e90825820482994d" }
+Some(Entity({"delta": BigInt(800), "id": Bytes(0xecfae2387ed35c2ad529fbd3e90825820482994d), "operation": Int(-1)}))
+block used time: 0.035587136
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x5da65fd51d2478959140e478f50b43701356c998" }
+Some(Entity({"id": Bytes(0x5da65fd51d2478959140e478f50b43701356c998), "delta": BigInt(900), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x54a840b622727c439797deb5c8a100edc867d3a5" }
+Some(Entity({"id": Bytes(0x54a840b622727c439797deb5c8a100edc867d3a5), "delta": BigInt(900), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x470bb2257be61fb4b013da520dc9287dc45fad12" }
+Some(Entity({"operation": Int(-1), "delta": BigInt(900), "id": Bytes(0x470bb2257be61fb4b013da520dc9287dc45fad12)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x461931b402347e00c134f20abe2dfece2dd43813" }
+Some(Entity({"operation": Int(1), "id": Bytes(0x461931b402347e00c134f20abe2dfece2dd43813), "delta": BigInt(900)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x8b9d120f48fe7fbd9499fe4acd21eb6b39616205" }
+Some(Entity({"id": Bytes(0x8b9d120f48fe7fbd9499fe4acd21eb6b39616205), "delta": BigInt(900), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xb7d208401141f38343975f8f361f566252505f99" }
+Some(Entity({"delta": BigInt(900), "operation": Int(1), "id": Bytes(0xb7d208401141f38343975f8f361f566252505f99)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xecfae2387ed35c2ad529fbd3e90825820482994d" }
+Some(Entity({"delta": BigInt(900), "id": Bytes(0xecfae2387ed35c2ad529fbd3e90825820482994d), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xd3a7015a40f3a359b75d20c9333d33b8ec7a9823" }
+Some(Entity({"id": Bytes(0xd3a7015a40f3a359b75d20c9333d33b8ec7a9823), "operation": Int(1), "delta": BigInt(900)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x84029b558c20a8371b30b421192322de93b1aa0c" }
+Some(Entity({"id": Bytes(0x84029b558c20a8371b30b421192322de93b1aa0c), "operation": Int(1), "delta": BigInt(900)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x19207017d81e7300b03fd86f20b40a7449d7dd95" }
+Some(Entity({"id": Bytes(0x19207017d81e7300b03fd86f20b40a7449d7dd95), "delta": BigInt(900), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x410b1ff97a4879dc62a8266bc498820470b7e77e" }
+Some(Entity({"delta": BigInt(900), "id": Bytes(0x410b1ff97a4879dc62a8266bc498820470b7e77e), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xb422abe1717fb03e5fa22c4fc97287ccda0ddc3f" }
+Some(Entity({"id": Bytes(0xb422abe1717fb03e5fa22c4fc97287ccda0ddc3f), "operation": Int(-1), "delta": BigInt(900)}))
+block used time: 0.036318897
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x162a9021b3008ed58049e40091c5ed94d2621c72" }
+Some(Entity({"operation": Int(1), "id": Bytes(0x162a9021b3008ed58049e40091c5ed94d2621c72), "delta": BigInt(1000)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x7d39aa5e7cae56320ed5f306b9bf72e6b9779492" }
+Some(Entity({"operation": Int(1), "id": Bytes(0x7d39aa5e7cae56320ed5f306b9bf72e6b9779492), "delta": BigInt(1000)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x3eef5d7eaac2e669e04080b9e5a5cf1b568b7568" }
+Some(Entity({"operation": Int(-1), "delta": BigInt(1000), "id": Bytes(0x3eef5d7eaac2e669e04080b9e5a5cf1b568b7568)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x281e50058db1c2f9b293348e804ac1e0cbbf8cfa" }
+Some(Entity({"id": Bytes(0x281e50058db1c2f9b293348e804ac1e0cbbf8cfa), "delta": BigInt(1000), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x58d65409fc77e12f31dfa32b61b69a2e15786373" }
+Some(Entity({"id": Bytes(0x58d65409fc77e12f31dfa32b61b69a2e15786373), "operation": Int(-1), "delta": BigInt(1000)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x7701b29d4a41842edae6ed38f604ef478d23c8d3" }
+Some(Entity({"delta": BigInt(1000), "operation": Int(-1), "id": Bytes(0x7701b29d4a41842edae6ed38f604ef478d23c8d3)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x03ae1bc1d2784ccd1fd1bd48fa876231550f5a80" }
+Some(Entity({"id": Bytes(0x03ae1bc1d2784ccd1fd1bd48fa876231550f5a80), "delta": BigInt(1000), "operation": Int(1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xd113a0603d3223c6e3f8e85e9d5d2b56e55cc998" }
+Some(Entity({"operation": Int(-1), "id": Bytes(0xd113a0603d3223c6e3f8e85e9d5d2b56e55cc998), "delta": BigInt(1000)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0x1cfaa5c67f4f630d0bb1709c96fd1dd2f280f33c" }
+Some(Entity({"id": Bytes(0x1cfaa5c67f4f630d0bb1709c96fd1dd2f280f33c), "delta": BigInt(1000), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xecfae2387ed35c2ad529fbd3e90825820482994d" }
+Some(Entity({"delta": BigInt(1000), "id": Bytes(0xecfae2387ed35c2ad529fbd3e90825820482994d), "operation": Int(-1)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xb7d208401141f38343975f8f361f566252505f99" }
+Some(Entity({"delta": BigInt(1000), "operation": Int(1), "id": Bytes(0xb7d208401141f38343975f8f361f566252505f99)}))
+EntityKey { subgraph_id: DeploymentHash("QmbGhqkfvuqpTnaHokYXPxKZmPbQtmATmbZK8BccbgPtg4"), entity_type: EntityType("Gravatar"), entity_id: "0xbf20f91530372930c1f1ed19e94851c72092da58" }
+Some(Entity({"id": Bytes(0xbf20f91530372930c1f1ed19e94851c72092da58), "operation": Int(1), "delta": BigInt(1000)}))
+block used time: 0.037982079
+block used time: 0.03866589
