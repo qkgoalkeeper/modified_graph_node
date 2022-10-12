@@ -7,6 +7,7 @@ use atomic_refcell::AtomicRefCell;
 use futures01::sync::mpsc::Receiver;
 use graph::blockchain::block_stream::{BlockStreamEvent, BlockWithTriggers, FirehoseCursor};
 use graph::blockchain::{Block, Blockchain, DataSource, TriggerFilter as _};
+use graph::components::store::StoredDynamicDataSource;
 use graph::components::{
     store::ModificationsAndCache,
     subgraph::{CausalityRegion, MappingError, ProofOfIndexing, SharedProofOfIndexing},
@@ -25,7 +26,7 @@ use tokio::sync::Mutex;
 use std::thread;
 use std::time::{Duration, Instant};
 
-use futures03::channel::oneshot::channel;
+// use futures03::channel::oneshot::channel;
 
 use super::state;
 
@@ -149,7 +150,7 @@ pub async fn run<C: Blockchain,T:RuntimeHostBuilder<C>>(mut arc_self:SubgraphRun
 
             
             let mut handles = vec![];
-            let mut action_for_return:Arc<Mutex<Vec<Result<Action,_>>>> = Arc::new(Mutex::new(Vec::new()));
+            let mut action_for_return:Arc<Mutex<Vec<Result<(Action,Result<ParameterForStoreTransactBlockOperations,()>),_>>>> = Arc::new(Mutex::new(Vec::new()));
 
             for _i in 0..events.len(){
                 
@@ -198,6 +199,8 @@ pub async fn run<C: Blockchain,T:RuntimeHostBuilder<C>>(mut arc_self:SubgraphRun
             }
 
 
+            
+
             let mut action_number = 0;
 
             {
@@ -205,27 +208,69 @@ pub async fn run<C: Blockchain,T:RuntimeHostBuilder<C>>(mut arc_self:SubgraphRun
                 let self_inputs_mutex = self_inputs_copy.lock().await;
                 let self_logger_copy = arc_self.logger.clone();
                 let self_logger_mutex = self_logger_copy.lock().await;
+                let self_metrics_copy = arc_self.metrics.clone();
+                let self_metrics_mutex = self_metrics_copy.lock().await;
 
+
+                let store = &self_inputs_mutex.store; 
+                let mut parameter_for_store_vec = Vec::new();
                 let mut action_for_return_mutex = action_for_return.lock().await;
                 for i in 0..action_for_return_mutex.len(){
-                    let temp_action = action_for_return_mutex.pop().unwrap().unwrap();
+                    let (temp_action,mut parameter_for_store) = action_for_return_mutex.pop().unwrap().unwrap();
+
+                    match parameter_for_store{
+                        Ok(parameter_unwrap_for_store)=>{
+                            if parameter_unwrap_for_store.mods.len()>0{
+                                parameter_for_store_vec.push(parameter_unwrap_for_store);
+
+                            }
+                        }
+                        _ => {},
+                    }
+
+
+
                     match temp_action{
                         Action::Continue => continue,
                         Action::Stop => {
                             info!(self_logger_mutex, "Stopping subgraph");
                             self_inputs_mutex.store.flush().await?;
-                            return Ok(());
+                            action_number = 2;
+                            break;
+
+                            // return Ok(());
                         }
                         Action::Restart => {action_number=1;break;},
 
                     }
 
                 }
-            
+                
+                parameter_for_store_vec.sort_by(|a,b|{b.block_ptr.number.cmp(&a.block_ptr.number)});
+
+                for i in 0..parameter_for_store_vec.len(){
+                    let parameter_unwrap_for_store = parameter_for_store_vec.pop().unwrap();
+                    // println!("{:?}",&parameter_unwrap_for_store.block_ptr.number);
+                    store
+                    .transact_block_operations(
+                        parameter_unwrap_for_store.block_ptr,
+                        parameter_unwrap_for_store.firehose_cursor,
+                        parameter_unwrap_for_store.mods,
+                        &self_metrics_mutex.host.stopwatch,
+                        parameter_unwrap_for_store.data_sources,
+                        parameter_unwrap_for_store.deterministic_errors,
+                        self_inputs_mutex.manifest_idx_and_name.clone(),
+                    )
+                    .await
+                    .context("Failed to transact block operations")?;
+                }
             }
 
             if action_number==1{
                 break;
+            }
+            if action_number==2{
+                return Ok(());
             } 
         }
     }
@@ -255,6 +300,30 @@ where
 
 }
 
+//return state parameters for store operations
+
+pub struct ParameterForStoreTransactBlockOperations
+{
+    block_ptr: BlockPtr,
+    firehose_cursor: FirehoseCursor,
+    mods: Vec<EntityModification>,
+    data_sources: Vec<StoredDynamicDataSource>,
+    deterministic_errors: Vec<SubgraphError>
+}
+
+impl ParameterForStoreTransactBlockOperations{
+    fn new(block_ptr_:BlockPtr,firehose_cursor_: FirehoseCursor)->ParameterForStoreTransactBlockOperations{
+        ParameterForStoreTransactBlockOperations{
+            block_ptr:block_ptr_,
+            firehose_cursor:firehose_cursor_,
+            mods:Vec::new(),
+            data_sources:Vec::new(),
+            deterministic_errors:Vec::new(),
+
+        }
+    }
+}
+
 
     /// Processes a block and returns the updated context and a boolean flag indicating
     /// whether new dynamic data sources have been added to the subgraph.
@@ -267,11 +336,12 @@ async fn process_block<C: Blockchain,T:RuntimeHostBuilder<C>>(
     block_stream_cancel_handle: &CancelHandle,
     block: BlockWithTriggers<C>,
     firehose_cursor: FirehoseCursor,
-) -> Result<Action, BlockProcessingError> {
+) -> Result<(Action,ParameterForStoreTransactBlockOperations), BlockProcessingError> {
     let triggers = block.trigger_data;
     let block = Arc::new(block.block);
     let block_ptr = block.ptr();
 
+    let mut parameter_for_store = ParameterForStoreTransactBlockOperations::new(block_ptr.clone(), firehose_cursor.clone());
 
     let logger = {
 
@@ -348,7 +418,7 @@ async fn process_block<C: Blockchain,T:RuntimeHostBuilder<C>>(
             // Losing the cache is a bit annoying but not an issue for correctness.
             //
             // See also b21fa73b-6453-4340-99fb-1a78ec62efb1.
-            return Ok(Action::Restart);
+            return Ok((Action::Restart,parameter_for_store));
         }
     };
 
@@ -425,7 +495,7 @@ async fn process_block<C: Blockchain,T:RuntimeHostBuilder<C>>(
 
         // Add entity operations for the new data sources to the block state
         // and add runtimes for the data sources to the subgraph instance.
-        persist_dynamic_data_sources(self_ctx_copy_copy_2,self_logger_copy_copy_2,&mut block_state.entity_cache, data_sources);
+        persist_dynamic_data_sources(self_ctx_copy_copy_2,self_logger_copy_copy_2,&mut block_state.entity_cache, data_sources).await;
 
         // Process the triggers in each host in the same order the
         // corresponding data sources have been created.
@@ -623,24 +693,30 @@ async fn process_block<C: Blockchain,T:RuntimeHostBuilder<C>>(
 
 
     //debug==========================================================================================
-    for x in &mods{
-        let y = x.clone();
-        println!("{:?}",y.entity_key());
-        println!("{:?}",y.entity());
-    }
+    // for x in &mods{
+    //     let y = x.clone();
+    //     println!("{:?}",y.entity_key());
+    //     println!("{:?}",y.entity());
+    // }
 
-    store
-        .transact_block_operations(
-            block_ptr,
-            firehose_cursor,
-            mods,
-            &self_metrics_mutex.host.stopwatch,
-            data_sources,
-            deterministic_errors,
-            self_inputs_mutex.manifest_idx_and_name.clone(),
-        )
-        .await
-        .context("Failed to transact block operations")?;
+
+    parameter_for_store.data_sources = data_sources;
+    parameter_for_store.mods = mods;
+
+    // store
+    //     .transact_block_operations(
+    //         block_ptr,
+    //         firehose_cursor,
+    //         mods,
+    //         &self_metrics_mutex.host.stopwatch,
+    //         data_sources,
+    //         deterministic_errors,
+    //         self_inputs_mutex.manifest_idx_and_name.clone(),
+    //     )
+    //     .await
+    //     .context("Failed to transact block operations")?;
+
+
 
     // For subgraphs with `nonFatalErrors` feature disabled, we consider
     // any error as fatal.
@@ -673,8 +749,8 @@ async fn process_block<C: Blockchain,T:RuntimeHostBuilder<C>>(
     }
 
     match needs_restart {
-        true => Ok(Action::Restart),
-        false => Ok(Action::Continue),
+        true => Ok((Action::Restart,parameter_for_store)),
+        false => Ok((Action::Continue,parameter_for_store)),
     }
 }
 
@@ -891,8 +967,8 @@ async fn handle_stream_event<C: Blockchain,T:RuntimeHostBuilder<C>>(
     self_metrics_copy: Arc<Mutex<RunnerMetrics>>,
     event: Option<Result<BlockStreamEvent<C>, CancelableError<Error>>>,
     cancel_handle: &CancelHandle,
-) -> Result<Action, Error> {
-    let action = match event {
+) -> Result<(Action,Result<ParameterForStoreTransactBlockOperations,()>), Error> {
+    let (action,parameter_for_store) = match event {
         Some(Ok(BlockStreamEvent::ProcessBlock(block, cursor))) => {
 
             handle_process_block(self_ctx_copy,self_inputs_copy,self_state_copy,self_logger_copy,self_metrics_copy,block, cursor, cancel_handle)
@@ -906,10 +982,10 @@ async fn handle_stream_event<C: Blockchain,T:RuntimeHostBuilder<C>>(
         Some(Err(e)) => handle_err(self_logger_copy,e, cancel_handle).await?,
         // If the block stream ends, that means that there is no more indexing to do.
         // Typically block streams produce indefinitely, but tests are an example of finite block streams.
-        None => Action::Stop,
+        None => (Action::Stop,Err(())),
     };
 
-    Ok(action)
+    Ok((action,parameter_for_store))
 }
 // }
 
@@ -955,8 +1031,9 @@ async fn handle_process_block<C: Blockchain,T:RuntimeHostBuilder<C>>(
     block: BlockWithTriggers<C>,
     cursor: FirehoseCursor,
     cancel_handle: &CancelHandle,
-) -> Result<Action, Error> {
+) -> Result<(Action,Result<ParameterForStoreTransactBlockOperations,()>), Error> {
     let block_ptr = block.ptr();
+
 
     {
         let self_metrics_mutex = self_metrics_copy.lock().await;
@@ -990,7 +1067,7 @@ async fn handle_process_block<C: Blockchain,T:RuntimeHostBuilder<C>>(
                 1000,
             )
         {
-            return Ok(Action::Continue);
+            return Ok((Action::Continue,Err(())));
         } else {
             self_state_mutex.skip_ptr_updates_timer = Instant::now();
         }
@@ -1034,7 +1111,7 @@ async fn handle_process_block<C: Blockchain,T:RuntimeHostBuilder<C>>(
 
 
         match res {
-            Ok(action) => {
+            Ok((action,parameter_for_store)) => {
                 // Once synced, no need to try to update the status again.
                 if !self_state_mutex.synced
                     && close_to_chain_head(
@@ -1077,7 +1154,7 @@ async fn handle_process_block<C: Blockchain,T:RuntimeHostBuilder<C>>(
                 if let Some(stop_block) = &self_inputs_mutex.stop_block {
                     if block_ptr.number >= *stop_block {
                         info!(self_logger_mutex, "stop block reached for subgraph");
-                        return Ok(Action::Stop);
+                        return Ok((Action::Stop,Ok(parameter_for_store)));
                     }
                 }
 
@@ -1090,14 +1167,15 @@ async fn handle_process_block<C: Blockchain,T:RuntimeHostBuilder<C>>(
                         .remove(&self_inputs_mutex.deployment.id);
 
                     // And restart the subgraph
-                    return Ok(Action::Restart);
+                    return Ok((Action::Restart,Ok(parameter_for_store)));
                 }
 
-                return Ok(Action::Continue);
+                return Ok((Action::Continue,Ok(parameter_for_store)));
             }
             Err(BlockProcessingError::Canceled) => {
                 debug!(self_logger_mutex, "Subgraph block stream shut down cleanly");
-                return Ok(Action::Stop);
+                
+                return Ok((Action::Stop,Err(())));
             }
 
             // Handle unexpected stream errors by marking the subgraph as failed.
@@ -1109,6 +1187,7 @@ async fn handle_process_block<C: Blockchain,T:RuntimeHostBuilder<C>>(
                 //
                 // Without it, POI changes on failure would be kept in the entity cache
                 // and be transacted incorrectly in the next run.
+                
                 self_state_mutex.entity_lfu_cache = LfuCache::new();
 
                 self_metrics_mutex.stream.deployment_failed.set(1.0);
@@ -1178,7 +1257,7 @@ async fn handle_process_block<C: Blockchain,T:RuntimeHostBuilder<C>>(
                         self_state_mutex.should_try_unfail_non_deterministic = true;
 
                         // And restart the subgraph.
-                        return Ok(Action::Restart);
+                        return Ok((Action::Restart,Err(())));
                     }
                 }
             }
@@ -1194,7 +1273,7 @@ async fn handle_revert<C: Blockchain,T:RuntimeHostBuilder<C>>(
     self_metrics_copy: Arc<Mutex<RunnerMetrics>>,
     revert_to_ptr: BlockPtr,
     cursor: FirehoseCursor,
-) -> Result<Action, Error> {
+) -> Result<(Action,Result<ParameterForStoreTransactBlockOperations,()>), Error> {
     // Current deployment head in the database / WritableAgent Mutex cache.
     //
     // Safe unwrap because in a Revert event we're sure the subgraph has
@@ -1214,7 +1293,7 @@ async fn handle_revert<C: Blockchain,T:RuntimeHostBuilder<C>>(
 
         if revert_to_ptr.number >= subgraph_ptr.number {
             info!(&self_logger_mutex, "Block to revert is higher than subgraph pointer, nothing to do"; "subgraph_ptr" => &subgraph_ptr, "revert_to_ptr" => &revert_to_ptr);
-            return Ok(Action::Continue);
+            return Ok((Action::Continue,Err(())));
         }
 
         info!(&self_logger_mutex, "Reverting block to get back to main chain"; "subgraph_ptr" => &subgraph_ptr, "revert_to_ptr" => &revert_to_ptr);
@@ -1230,7 +1309,7 @@ async fn handle_revert<C: Blockchain,T:RuntimeHostBuilder<C>>(
             error!(&self_logger_mutex, "Could not revert block. Retrying"; "error" => %e);
 
             // Exit inner block stream consumption loop and go up to loop that restarts subgraph
-            return Ok(Action::Restart);
+            return Ok((Action::Restart,Err(())));
         }
 
         subgraph_ptr
@@ -1288,18 +1367,18 @@ async fn handle_revert<C: Blockchain,T:RuntimeHostBuilder<C>>(
 
 
 
-    Ok(Action::Continue)
+    Ok((Action::Continue,Err(())))
 }
 
 async fn handle_err(
     self_logger_copy: Arc<Mutex<Logger>>,
     err: CancelableError<Error>,
     cancel_handle: &CancelHandle,
-) -> Result<Action, Error> {
+) -> Result<(Action,Result<ParameterForStoreTransactBlockOperations,()>), Error> {
     let self_logger_mutex = self_logger_copy.lock().await; 
     if cancel_handle.is_canceled() {
         debug!(&self_logger_mutex, "Subgraph block stream shut down cleanly");
-        return Ok(Action::Stop);
+        return Ok((Action::Stop,Err(())));
     }
 
     debug!(
@@ -1308,7 +1387,7 @@ async fn handle_err(
         "error" => format!("{}", err),
     );
 
-    Ok(Action::Continue)
+    Ok((Action::Continue,Err(())))
 }
 // }
 
