@@ -18,6 +18,7 @@ use graph::data::subgraph::{
     SubgraphFeature,
 };
 use graph::prelude::*;
+use graph::prelude::chrono::Local;
 use graph::util::{backoff::ExponentialBackoff, lfu_cache::LfuCache};
 use std::convert::TryFrom;
 
@@ -151,7 +152,16 @@ pub async fn run<C: Blockchain,T:RuntimeHostBuilder<C>>(mut arc_self:SubgraphRun
             
             let mut handles = vec![];
             let mut action_for_return:Arc<Mutex<Vec<Result<(Action,Result<ParameterForStoreTransactBlockOperations,()>),_>>>> = Arc::new(Mutex::new(Vec::new()));
+            
+            let events_length = events.len();
+            let start = Instant::now();
+            let start_dt = Local::now();
 
+            println!(
+                "spawn  start  time: {} ",
+                start_dt.format("%Y-%m-%d %H:%M:%S:%.3f").to_string()
+            );
+            
             for _i in 0..events.len(){
                 
                 let self_ctx_copy = arc_self.ctx.clone();
@@ -199,7 +209,15 @@ pub async fn run<C: Blockchain,T:RuntimeHostBuilder<C>>(mut arc_self:SubgraphRun
             }
 
 
-            
+            let end_dt = Local::now();
+            println!(
+                "spawn  end  time: {} ",
+                end_dt.format("%Y-%m-%d %H:%M:%S:%.3f").to_string()
+            );
+
+            //====================================================================================================================================================
+            let elapsed = start.elapsed().as_secs_f64();
+            println!("spawn {} block used time: {}",events_length,elapsed);
 
             let mut action_number = 0;
 
@@ -1085,7 +1103,7 @@ async fn handle_process_block<C: Blockchain,T:RuntimeHostBuilder<C>>(
 
     let elapsed = start.elapsed().as_secs_f64();
 //=========================================================================================================
-    println!("block used time: {}",elapsed);
+    println!("block {} used time: {}",&block_ptr.number,elapsed);
 
     {
 

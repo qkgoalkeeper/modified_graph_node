@@ -125,7 +125,7 @@ pub fn spawn_module<C: Blockchain>(
                 );
                 for trigger in triggers {
                     trigger_group.push(trigger);
-                    if trigger_group.len() == n_iter_group {
+                    if trigger_group.len() >= n_iter_group {
                         trigger_groups.push(trigger_group);
                         trigger_group = Vec::new();
                     }
